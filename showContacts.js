@@ -8,19 +8,20 @@ contacts={
 		infra.require('*popup/popup.js');
 		popup.open(this.popup);
 	},
-	popup:{
-		config:{
-			title:'Форма контактов'
-		}
-	},
-	layer:{autofocus:false,div:'showContacts',reparse:true}
+	popup:{},
+	layer:{
+		onlyclient:true,
+		autofocus:true, 
+		div:"showContacts",
+		divcheck:true
+	}
 }
 contacts.popup.external=contacts.extlayer;
 contacts.layer.external=contacts.extlayer;
 
-/*infrajs.listen(infrajs,'oninitone',function(){//depricated
-	//infrajs(contacts.layer);//должна добавиться после того как основные слои добавятся, и при этом участвовать в первой пробежке
-});*/
+//infra.when(infrajs,'oninit',function(){//depricated
+//	infrajs.checkAdd(contacts.layer);//должна добавиться после того как основные слои добавятся, и при этом участвовать в первой пробежке
+//});
 infra.listen(infrajs,'onshow',function(){
 	$('.showContacts[showContacts!=true]').attr('nohref','1').attr('showContacts','true').click(function(){
 		contacts.show();
