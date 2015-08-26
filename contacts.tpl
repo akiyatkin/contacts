@@ -57,9 +57,5 @@
 			</div>
 		</center>
 		<script>
-			var layer=infrajs.getUnickLayer('{unick}');
-			infra.when(infrajs,'onshow',function(){
-				if(popup.layer!=layer)return;
-				infrajs.popup_memorize('contacts.show()');
-			});
+			infrajs.popup_memorize('contacts.show()');
 		</script>
