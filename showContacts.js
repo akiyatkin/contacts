@@ -24,6 +24,11 @@ contacts.layer.external=contacts.extlayer;
 //});
 infra.listen(infrajs,'onshow',function(){
 	$('.showContacts[showContacts!=true]').attr('nohref','1').attr('showContacts','true').click(function(){
+		if($(this).data('text')){
+			if(!infra.session.get('user.text')){
+				infra.session.set('user.text',$(this).data('text'));
+			}
+		}
 		contacts.show();
 		return false;
 	});
