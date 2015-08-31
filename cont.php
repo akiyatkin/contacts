@@ -47,7 +47,7 @@ if (!$is_persona) {
 			//@mkdir($maildir,0755);
 			
 			infra_require('*autoedit/admin.inc.php');
-			$maildir='*.Сообщения с сайта/';
+			$maildir='*.contacts/';
 			$maildir=autoedit_createPath($maildir);//путь до файла или дирректории со * или без
 			//$mdata=@file_get_contents('infra/data/.contacts.js');
 			//$mdata=infra_tophp($mdata);
