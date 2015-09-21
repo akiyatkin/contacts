@@ -18,7 +18,7 @@
 	
 	<h1>Форма контактов</h1>
 	<div class="plugin_contacts">
-		<form action="{infra.theme(:*contacts/cont.php)}" method="post">
+		<form action="?*contacts/cont.php" method="post">
 			<div class="form-group">
 				<label for="contactFace">Контактное лицо<span>*&nbsp;</span></label>
 				<input type="text" class="form-control"  value="{name}" name="name" placeholder="Контактное лицо">
@@ -65,7 +65,22 @@
 		</form>
 	</div>
 	<script>
-		infrajs.popup_memorize('contacts.show()');
+		infra.wait(infrajs,'oncheck',function(){
+			if(popup.st)infrajs.popup_memorize('contacts.show()');
+			var layer=infrajs.find('unick','{unick}');
+			layer.onsubmit=function(layer){
+				var conf=layer.config;
+				var div=$('#'+layer.div);
+				if(!conf.ans){
+					div.find('.answer').html('<b class="alert">Произошла ошибка.<br>Cообщение не отправлено...</b>');
+				}
+				if(conf.ans.result>0){
+					div.find('textarea').val('').change();
+				}
+			}
+		});
 	</script>
 {alert:}
-<div class="alert {..result?:alert-success?:alert-danger}">{.}</b></div>
+<div class="alert {..result?:as?:ad}">{.}</b></div>
+{as:}alert-success
+{ad:}alert-danger
