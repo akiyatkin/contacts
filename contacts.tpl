@@ -1,23 +1,19 @@
 {root:}
 	{infra.session.get(:safe.user,~true):start}
+{title:}<h1>Форма контактов</h1>
 {start:}
-	<style scoped>
-		.plugin_contacts {
-			
-		}
-		.plugin_contacts label {
-		
-		}
-		.plugin_contacts label span {
-			color:red;
-		}
-		.plugin_contacts textarea {
-			height:102px;
-		}
-	</style>
-	
-	<h1>Форма контактов</h1>
+	{:title}
+	{:body}
+{body:}
 	<div class="plugin_contacts">
+		<style scoped>
+			.plugin_contacts label span {
+				color:red;
+			}
+			.plugin_contacts textarea {
+				height:102px;
+			}
+		</style>
 		<form action="?*contacts/cont.php" method="post">
 			<div class="form-group">
 				<label for="contactFace">Контактное лицо<span>*&nbsp;</span></label>
@@ -40,32 +36,11 @@
 				<textarea name="text" class="form-control" rows="3"></textarea>
 			</div>
 			{config.ans.msg:alert}
-		
-			
 			<button type="submit" class="btn btn-default" onclick="if(window._gaq)_gaq.push(['_trackEvent','Кнопка','Оставить сообщение']);">Отправить</button>
-			
-
-			<!--
-			<label>Контактное лицо<span>*&nbsp;</span></label><br> 
-			<input value="{name}" name="name" type="text"><br />
-			<label>Организация</label>
-			<input value="{org}" name="org" type="text"><br />
-			<label>Email<span>*</span></label>
-			<input value="{email}" name="email" type="email"><br />
-			<label>Телефон<span>*</span></label>
-			<input value="{phone}" name="phone" type="text"><br />
-			<label>Текст письма<span>*</span></label>
-			<textarea name="text" cols=35 rows=5></textarea>
-			<div class="answer"><b class="alert">{config.ans.msg}</b></div>
-			<center class="sub_center">
-				<input class="submit" value="Отправить" type="submit"> <br>
-			</center>
-			-->
-			
 		</form>
 	</div>
 	<script>
-		infra.wait(infrajs,'oncheck',function(){
+		if(window.infra)infra.wait(infrajs,'oncheck',function(){
 			if(popup.st)infrajs.popup_memorize('contacts.show()');
 			var layer=infrajs.find('unick','{unick}');
 			layer.onsubmit=function(layer){
