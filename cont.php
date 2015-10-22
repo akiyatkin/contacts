@@ -24,10 +24,16 @@ if (!$is_persona) {
 			return infra_err($ans, 'Уточните, пожалуйста, номер телефона!');
 		}else{
 			
+			session_start();
+			if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
+			if (time() - $_SESSION['submit_time'] < 60) return infra_err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
+			$_SESSION['submit_time'] = time();
+
 			$data=array();
 			$data['email']=$email;
 			$data['text']=$text;
 			$data['name']=$persona;
+			$data['post']=$_POST;
 			$data['org']=@$_POST['org'];
 			$data['phone']=@$_POST['phone'];
 			$data['ip']=$_SERVER['REMOTE_ADDR'];
@@ -46,9 +52,12 @@ if (!$is_persona) {
 			//$maildir=infra_tofs('infra/data/.Сообщения с сайта/');
 			//@mkdir($maildir,0755);
 			
-			infra_require('*autoedit/admin.inc.php');
-			$maildir='*.contacts/';
-			$maildir=autoedit_createPath($maildir);//путь до файла или дирректории со * или без
+			
+			
+			$maildir=$dirs['data'].'.contacts/';	
+			$dirs=infra_dirs();
+			@mkdir($maildir);
+			
 			//$mdata=@file_get_contents('infra/data/.contacts.js');
 			//$mdata=infra_tophp($mdata);
 			
