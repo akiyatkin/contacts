@@ -53,9 +53,8 @@ if (!$is_persona) {
 			//@mkdir($maildir,0755);
 			
 			
-			
-			$maildir=$dirs['data'].'.contacts/';	
 			$dirs=infra_dirs();
+			$maildir=$dirs['data'].'.contacts/';	
 			@mkdir($maildir);
 			
 			//$mdata=@file_get_contents('infra/data/.contacts.js');
