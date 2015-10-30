@@ -24,13 +24,19 @@
 				<label for="contacts_org">Организация</label>
 				<input id="contacts_org" type="text" class="form-control"  value="{org}" name="org" placeholder="Организация">
 			</div>
-			<div class="form-group">
-				<label for="contacts_email">Email<span>*</span></label>
-				<input id="contacts_email" type="email" class="form-control" value="{email}" name="email" id="email" placeholder="Ваш почтовый адрес">
-			</div>
-			<div class="form-group">
-				<label for="contacts_phone">Телефон<span>*</span></label>
-				<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone" id="phone" placeholder="Телефон для связи">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="contacts_email">Email<span>*</span></label>
+						<input id="contacts_email" type="email" class="form-control" value="{email}" name="email" id="email" placeholder="Ваш почтовый адрес">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="contacts_phone">Телефон<span>*</span></label>
+						<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone" id="phone" placeholder="Телефон для связи">
+					</div>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="contacts_text">Текст письма<span>*</span></label>
