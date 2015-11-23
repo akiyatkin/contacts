@@ -23,7 +23,7 @@ contacts.layer.external=contacts.extlayer;
 //	infrajs.checkAdd(contacts.layer);//должна добавиться после того как основные слои добавятся, и при этом участвовать в первой пробежке
 //});
 infra.listen(infrajs,'onshow',function(){
-	$('.showContacts[showContacts!=true]').attr('nohref','1').attr('showContacts','true').click(function(){
+	$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click(function(){
 		if($(this).data('text')){
 			if(!infra.session.get('user.text')){
 				infra.session.set('user.text',$(this).data('text'));
