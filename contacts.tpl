@@ -16,13 +16,19 @@
 			}
 		</style>
 		<form action="?*contacts/cont.php" method="post">
-			<div class="form-group">
-				<label for="contacts_name">Контактное лицо<span>*&nbsp;</span></label>
-				<input id="contacts_name" type="text" class="form-control"  value="{name}" name="name" placeholder="Контактное лицо">
-			</div>
-			<div class="form-group">
-				<label for="contacts_org">Организация</label>
-				<input id="contacts_org" type="text" class="form-control"  value="{org}" name="org" placeholder="Организация">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="contacts_name">Контактное лицо<span>*&nbsp;</span></label>
+						<input id="contacts_name" type="text" class="form-control"  value="{name}" name="name" placeholder="Контактное лицо">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="contacts_org">Организация</label>
+						<input id="contacts_org" type="text" class="form-control"  value="{org}" name="org" placeholder="Организация">
+					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
