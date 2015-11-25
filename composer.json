@@ -1,15 +1,9 @@
 {
-    "name": "itlife/contacts",
-    "description": "plugin for infrajs",
+    "name": "infrajs/contacts",
+    "description": "Contact form",
     "license": "GPL3",
-    "authors": [{
-        "name": "itlife",
-        "email": "info@itlife-studio.ru"
-    }],
     "require": {
-		"itlife/popup": "~1"
-    },
-    "autoload": {
-        "psr-4": { "itlife\\contacts\\": "/" }
+		"infrajs/popup": "~1",
+		"infrajs/controller": "~1"
     }
 }
