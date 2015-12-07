@@ -7,26 +7,26 @@ $persona=@$_POST['name'];
 $phone=@$_POST['phone'];
 $is_persona=strlen($persona)>2;
 if (!$is_persona) {
-	return infra_err($ans, 'Уточние, пожалуйста, вашем имя!');
+	return Ans::err($ans, 'Уточние, пожалуйста, вашем имя!');
 }else{
 	$email=@$_POST['email'];
 	$is_email=preg_match('/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/',$email);
 	if ($is_email != true) {
-		return infra_err($ans, 'Уточните, пожалуйста, адрес электронной почты!');
+		return Ans::err($ans, 'Уточните, пожалуйста, адрес электронной почты!');
 	}else{
 		$text=@$_POST['text'];
 		$is_text=strlen($text)>5;
 		
 		if($is_text!=true) {
-			return infra_err($ans, 'Уточните, пожалуйста, текст письма!');
+			return Ans::err($ans, 'Уточните, пожалуйста, текст письма!');
 			//echo infra_tojs($answer);
 		}else if(!$phone||strlen($phone)<6) {
-			return infra_err($ans, 'Уточните, пожалуйста, номер телефона!');
+			return Ans::err($ans, 'Уточните, пожалуйста, номер телефона!');
 		}else{
 			
 			session_start();
 			if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
-			if (time() - $_SESSION['submit_time'] < 60) return infra_err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
+			if (time() - $_SESSION['submit_time'] < 60) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
 			$_SESSION['submit_time'] = time();
 
 			$data=array();
@@ -49,7 +49,7 @@ if (!$is_persona) {
 			//адрес отправителя
 			//имя отправителя
 			//Папка с копиями писем
-			//$maildir=infra_tofs('infra/data/.Сообщения с сайта/');
+			//$maildir=Path::tofs('infra/data/.Сообщения с сайта/');
 			//@mkdir($maildir,0755);
 			
 			
@@ -74,27 +74,27 @@ if (!$is_persona) {
 			}
 			$ans['testmail']=$mdata['testmail'];
 
-			infra_require('*infra/ext/template.php');
+			Path::req('*infra/ext/template.php');
 			$text=Load::loadTEXT('*contacts/mail.tpl');
 			$body=Template::parse($text,$data);
 			if(!$body) $body='Ошибка. Не найден шаблон письма!';
 
 			if($maildir){
 				$arg=$mdata;
-				$folder=infra_theme($maildir);
+				$folder=Path::theme($maildir);
 				file_put_contents($folder.date('Y F j H-i').' '.time().'.txt',print_r($body,true)."\n\n\n\n\n".print_r($arg,true));
 			}
 			if(isset($mdata['email_from'])){
 				$r=infra_mail_toAdmin($mdata['subject'],$mdata['email_from'],$body,$mdata['testmail']);
 				if($r){
-					return infra_ret($ans, "Письмо отправлено!<blockquote>".$data['text']."</blockquote>");
+					return Ans::ret($ans, "Письмо отправлено!<blockquote>".$data['text']."</blockquote>");
 				}else{	
-					return infra_err($ans,"Неудалось отправить письмо из-за ошибки на сервере!");
+					return Ans::err($ans,"Неудалось отправить письмо из-за ошибки на сервере!");
 				}
 			}else{
-				return infra_err($ans, 'Ошибка с адресом получателя!');
+				return Ans::err($ans, 'Ошибка с адресом получателя!');
 			}
 		}
 	}
 }
-return infra_err($ans);
+return Ans::err($ans);

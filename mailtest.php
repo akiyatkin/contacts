@@ -16,22 +16,22 @@
 
 	//return;//нельзя зачастую лимит стоит сколько писем за раз можно отправлять
 	//echo '<br>Сложная проверка<br>';
-	infra_require('*contacts/mail.php');
-	$conf=infra_config();
+	Path::req('*contacts/mail.php');
+	$conf=Infra::config();
 	$admin=$conf['admin'];
 	$ans=array();
-	if(!$admin)return infra_err($ans,'Не найден конфиг');
-	if(!$admin['support'])return infra_err($ans,'У администратора не указан email support');
+	if(!$admin)return Ans::err($ans,'Не найден конфиг');
+	if(!$admin['support'])return Ans::err($ans,'У администратора не указан email support');
 
 	$bodydata=array(
 		'host'=>$_SERVER['HTTP_HOST'],
 		'date'=>date('j.m.Y')
 	);
-	infra_require('*infra/ext/template.php');
+	Path::req('*infra/ext/template.php');
 	$body=infra_template_parse('*contacts/mailtest.tpl',$bodydata);
 	$subject='Тестовое письмо';
 	$email_from='noreplay@'.$_SERVER['HTTP_HOST'];
 	$r=infra_mail_toSupport($subject,$email_from,$body,true);
 	
-	if(!$r)return infra_err($ans,'Ошибка. Не удалось отправить тестовое письмо');
-	return infra_ret($ans,'Тестовое письмо отправлено');
+	if(!$r)return Ans::err($ans,'Ошибка. Не удалось отправить тестовое письмо');
+	return Ans::ret($ans,'Тестовое письмо отправлено');
