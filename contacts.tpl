@@ -56,7 +56,7 @@
 	<script>
 		if(window.infra&&window.popup)infra.wait(infrajs,'oncheck',function(){
 			if(popup.st)infrajs.popup_memorize('contacts.show()');
-			var layer=infrajs.find('unick','{unick}');
+			var layer=infrajs.find('id','{id}');
 			layer.onsubmit=function(layer){
 				var conf=layer.config;
 				var div=$('#'+layer.div);
