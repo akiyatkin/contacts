@@ -28,7 +28,7 @@
 		'date'=>date('j.m.Y')
 	);
 	Path::req('*infra/ext/template.php');
-	$body=infra_template_parse('*contacts/mailtest.tpl',$bodydata);
+	$body=Template::parse('*contacts/mailtest.tpl',$bodydata);
 	$subject='Тестовое письмо';
 	$email_from='noreplay@'.$_SERVER['HTTP_HOST'];
 	$r=infra_mail_toSupport($subject,$email_from,$body,true);

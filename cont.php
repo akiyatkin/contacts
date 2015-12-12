@@ -1,4 +1,6 @@
 <?php
+namespace infrajs\contacts;
+use infrajs\path\Path;
 
 $ans=array();
 $ans['msg']='Письмо не отправлено';
@@ -53,8 +55,7 @@ if (!$is_persona) {
 			//@mkdir($maildir,0755);
 			
 			
-			$dirs=infra_dirs();
-			$maildir=$dirs['data'].'.contacts/';	
+			$maildir=Path::resolve('~.contacts/');	
 			@mkdir($maildir);
 			
 			//$mdata=@file_get_contents('infra/data/.contacts.js');
