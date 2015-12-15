@@ -16,7 +16,7 @@
 
 	//return;//нельзя зачастую лимит стоит сколько писем за раз можно отправлять
 	//echo '<br>Сложная проверка<br>';
-	Path::req('*contacts/mail.php');
+	Path::req('-contacts/mail.php');
 	$conf=Infra::config();
 	$admin=$conf['admin'];
 	$ans=array();
@@ -27,8 +27,8 @@
 		'host'=>$_SERVER['HTTP_HOST'],
 		'date'=>date('j.m.Y')
 	);
-	Path::req('*infra/ext/template.php');
-	$body=Template::parse('*contacts/mailtest.tpl',$bodydata);
+	Path::req('-infra/ext/template.php');
+	$body=Template::parse('-contacts/mailtest.tpl',$bodydata);
 	$subject='Тестовое письмо';
 	$email_from='noreplay@'.$_SERVER['HTTP_HOST'];
 	$r=infra_mail_toSupport($subject,$email_from,$body,true);

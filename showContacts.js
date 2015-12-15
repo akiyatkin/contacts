@@ -1,11 +1,11 @@
 contacts={
 	extlayer:{
 		divs:{},
-		external:'*contacts/contacts.layer.js',
+		external:'-contacts/contacts.layer.js',
 		config:{}
 	},
 	show:function(){
-		infra.require('*popup/popup.js');
+		infra.require('-popup/popup.js');
 		popup.open(this.popup);
 	},
 	popup:{},

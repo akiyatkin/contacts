@@ -75,8 +75,8 @@ if (!$is_persona) {
 			}
 			$ans['testmail']=$mdata['testmail'];
 
-			Path::req('*infra/ext/template.php');
-			$text=Load::loadTEXT('*contacts/mail.tpl');
+			Path::req('-infra/ext/template.php');
+			$text=Load::loadTEXT('-contacts/mail.tpl');
 			$body=Template::parse($text,$data);
 			if(!$body) $body='Ошибка. Не найден шаблон письма!';
 
