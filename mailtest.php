@@ -17,7 +17,7 @@
 	//return;//нельзя зачастую лимит стоит сколько писем за раз можно отправлять
 	//echo '<br>Сложная проверка<br>';
 	Path::req('-contacts/mail.php');
-	$conf=Infra::config();
+	$conf=Config::get();
 	$admin=$conf['admin'];
 	$ans=array();
 	if(!$admin)return Ans::err($ans,'Не найден конфиг');
