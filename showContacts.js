@@ -1,4 +1,4 @@
-define('?-contacts/showContacts.js', ['?-event/event.js'], function (Event) {
+define('/-contacts/showContacts.js', ['/-event/event.js'], function (Event) {
 	window.contacts={
 		extlayer:{
 			divs:{},
