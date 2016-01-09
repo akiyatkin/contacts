@@ -54,7 +54,7 @@
 	</div>
 {script:}
 	<script>
-		if(window.infra&&window.popup)infra.wait(infrajs,'oncheck',function(){
+		if(window.infra&&window.popup)Event.one('Infrajs.oncheck', function(){
 			if(popup.st)infrajs.popup_memorize('contacts.show()');
 			var layer=infrajs.find('id','{id}');
 			layer.onsubmit=function(layer){
