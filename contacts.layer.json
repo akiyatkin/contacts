@@ -1,6 +1,6 @@
 {
 	"tplroot":"root",
-	"tpl":"*contacts/contacts.tpl",
+	"tpl":"-contacts/contacts.tpl",
 	"autofocus":true,
 	"autosavename":"user",
 	"divs":{}

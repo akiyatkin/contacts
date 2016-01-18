@@ -1,5 +1,5 @@
 {root:}
-	{infra.session.get(:safe.user,~true):start}
+	{:start}
 {title:}<h1>Форма для сообщений</h1>
 {start:}
 	{:title}
@@ -20,13 +20,13 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="contacts_name">Контактное лицо<span>*&nbsp;</span></label>
-						<input id="contacts_name" type="text" class="form-control"  value="{name}" name="name" placeholder="Контактное лицо">
+						<input id="contacts_name" type="text" class="form-control"  value="{name}" name="name">
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="contacts_org">Организация</label>
-						<input id="contacts_org" type="text" class="form-control"  value="{org}" name="org" placeholder="Организация">
+						<input id="contacts_org" type="text" class="form-control"  value="{org}" name="org">
 					</div>
 				</div>
 			</div>
@@ -34,13 +34,13 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="contacts_email">Email<span>*</span></label>
-						<input id="contacts_email" type="email" class="form-control" value="{email}" name="email" id="email" placeholder="Ваш почтовый адрес">
+						<input id="contacts_email" type="email" class="form-control" value="{email}" name="email" id="email">
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="contacts_phone">Телефон<span>*</span></label>
-						<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone" id="phone" placeholder="Телефон для связи">
+						<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone" id="phone">
 					</div>
 				</div>
 			</div>
