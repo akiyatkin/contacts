@@ -15,7 +15,7 @@
 				height:102px;
 			}
 		</style>
-		<form action="?-contacts/cont.php" method="post">
+		<form action="/-contacts/cont.php" method="post">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">

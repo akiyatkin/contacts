@@ -1,6 +1,9 @@
 <?php
 namespace infrajs\contacts;
 use infrajs\path\Path;
+use infrajs\ans\Ans;
+use infrajs\load\Load;
+use infrajs\template\Template;
 
 $ans=array();
 $ans['msg']='Письмо не отправлено';
@@ -8,6 +11,7 @@ $ans['result']=0;
 $persona=@$_POST['name'];
 $phone=@$_POST['phone'];
 $is_persona=strlen($persona)>2;
+
 if (!$is_persona) {
 	return Ans::err($ans, 'Уточние, пожалуйста, вашем имя!');
 }else{
@@ -75,7 +79,6 @@ if (!$is_persona) {
 			}
 			$ans['testmail']=$mdata['testmail'];
 
-			Path::req('-infra/ext/template.php');
 			$text=Load::loadTEXT('-contacts/mail.tpl');
 			$body=Template::parse($text,$data);
 			if(!$body) $body='Ошибка. Не найден шаблон письма!';

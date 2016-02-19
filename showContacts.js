@@ -1,7 +1,7 @@
 window.contacts={
 	extlayer:{
 		divs:{},
-		external:'-contacts/contacts.layer.js',
+		external:'-contacts/contacts.layer.json',
 		config:{}
 	},
 	show:function(){
