@@ -19,7 +19,7 @@ window.contacts={
 contacts.popup.external=contacts.extlayer;
 contacts.layer.external=contacts.extlayer;
 
-//infra.when(infrajs,'oninit',function(){//depricated
+//infra.when(infrajs,'Infrajs.oninit',function(){//depricated
 //	infrajs.checkAdd(contacts.layer);//должна добавиться после того как основные слои добавятся, и при этом участвовать в первой пробежке
 //});
 Event.handler('Infrajs.onshow',function(){
