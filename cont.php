@@ -84,9 +84,8 @@ if (!$is_persona) {
 			}
 			$ans['testmail']=$mdata['testmail'];
 
-			$text=Load::loadTEXT('-contacts/mail.tpl');
-			$body=Template::parse($text,$data);
-			if(!$body) $body='Ошибка. Не найден шаблон письма!';
+			$body=Template::parse('-contacts/mail.tpl', $data);
+			if (!$body) $body='Ошибка. Не найден шаблон письма!';
 
 			if($maildir){
 				$arg=$mdata;
