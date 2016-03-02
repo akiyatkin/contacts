@@ -5,6 +5,10 @@ use infrajs\ans\Ans;
 use infrajs\load\Load;
 use infrajs\template\Template;
 
+if (!is_file('vendor/autoload.php')) {
+	chdir('../../../'); //Согласно фактическому расположению файла
+	require_once('vendor/autoload.php');
+}
 $ans=array();
 $ans['msg']='Письмо не отправлено';
 $ans['result']=0;
