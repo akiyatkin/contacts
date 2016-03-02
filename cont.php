@@ -3,6 +3,7 @@ namespace infrajs\contacts;
 use infrajs\path\Path;
 use infrajs\ans\Ans;
 use infrajs\load\Load;
+use infrajs\mail\Mail;
 use infrajs\template\Template;
 
 if (!is_file('vendor/autoload.php')) {
@@ -92,14 +93,14 @@ if (!$is_persona) {
 				$folder=Path::theme($maildir);
 				file_put_contents($folder.date('Y F j H-i').' '.time().'.txt',print_r($body,true)."\n\n\n\n\n".print_r($arg,true));
 			}
-			if(isset($mdata['email_from'])){
-				$r=infra_mail_toAdmin($mdata['subject'],$mdata['email_from'],$body,$mdata['testmail']);
-				if($r){
+			if (isset($mdata['email_from'])) {
+				$r = Mail::toAdmin($mdata['subject'], $mdata['email_from'], $body, $mdata['testmail']);
+				if ($r) {
 					return Ans::ret($ans, "Письмо отправлено!<blockquote>".$data['text']."</blockquote>");
-				}else{	
+				} else {	
 					return Ans::err($ans,"Неудалось отправить письмо из-за ошибки на сервере!");
 				}
-			}else{
+			} else {
 				return Ans::err($ans, 'Ошибка с адресом получателя!');
 			}
 		}

@@ -4,6 +4,7 @@
     "license": "GPL3",
     "require": {
 		"infrajs/popup": "~1",
+		"infrajs/mail": "~1",
 		"infrajs/controller": "~1"
     }
 }
