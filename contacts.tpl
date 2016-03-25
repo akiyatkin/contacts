@@ -54,19 +54,21 @@
 	</div>
 {script:}
 	<script>
-		if(window.infra&&window.popup)Event.one('Infrajs.oncheck', function(){
-			if(popup.st)infrajs.popup_memorize('contacts.show()');
-			var layer=infrajs.find('id','{id}');
-			layer.onsubmit=function(layer){
-				var conf=layer.config;
-				var div=$('#'+layer.div);
-				if(!conf.ans){
-					div.find('.answer').html('<b class="alert">Произошла ошибка.<br>Cообщение не отправлено...</b>');
+		domready(function(){
+			if(window.infra&&window.popup)Event.one('Infrajs.oncheck', function(){
+				if(popup.st)infrajs.popup_memorize('contacts.show()');
+				var layer=infrajs.find('id','{id}');
+				layer.onsubmit=function(layer){
+					var conf=layer.config;
+					var div=$('#'+layer.div);
+					if(!conf.ans){
+						div.find('.answer').html('<b class="alert">Произошла ошибка.<br>Cообщение не отправлено...</b>');
+					}
+					if(conf.ans.result>0){
+						div.find('textarea').val('').change();
+					}
 				}
-				if(conf.ans.result>0){
-					div.find('textarea').val('').change();
-				}
-			}
+			});
 		});
 	</script>
 {alert:}
