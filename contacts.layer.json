@@ -2,6 +2,7 @@
 	"tplroot":"root",
 	"tpl":"-contacts/contacts.tpl",
 	"autofocus":true,
+	"onsubmit":true,
 	"autosavename":"user",
 	"divs":{}
 }
