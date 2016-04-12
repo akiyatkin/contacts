@@ -5,7 +5,9 @@
 
 ```json
 {
-	"require":"infrajs/contacts":"~1"
+	"require":{
+		"infrajs/contacts":"~1"
+	}
 }
 ```
 
@@ -22,4 +24,4 @@
 ## Требования
 
 - Сайт должен работать через [infrajs/controller](https://github.com/infrajs/controller)
-- php>5.4
+- php > 5.4
