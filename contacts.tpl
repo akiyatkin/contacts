@@ -56,7 +56,7 @@
 	<script>
 		domready(function(){
 			if(window.infra&&window.popup)Event.one('Infrajs.oncheck', function(){
-				if(popup.st)infrajs.popup_memorize('contacts.show()');
+				if (popup.st) infrajs.popup_memorize('contacts.show()');
 				var layer=infrajs.ids['{id}'];
 				layer.onsubmit = function (layer) {
 					var conf=layer.config;
@@ -73,7 +73,10 @@
 					var config = infra.config('contacts');
 					if (config.yaCounter) {
 						var ya = window['yaCounter' + config.yaCounter];
-						if (ya) ya.reachGoal(config.yaGoal, conf.ans)
+						if (ya) {
+							console.info('reachGoal');
+							ya.reachGoal(config.yaGoal, conf.ans)
+						}
 					}
 				}
 			});

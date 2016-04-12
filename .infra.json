@@ -1,4 +1,5 @@
 {
+	"pub":["yaCounter","yaGoal"],
 	"dependencies":"event",
 	"yaCounter":"",
 	"yaGoal":"contacts",
