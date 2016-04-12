@@ -1,4 +1,6 @@
 {
 	"dependencies":"event",
+	"yaCounter":"",
+	"yaGoal":"contacts",
 	"js":"showContacts.js"
 }

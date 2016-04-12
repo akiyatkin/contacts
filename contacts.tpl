@@ -61,8 +61,19 @@
 				layer.onsubmit = function (layer) {
 					var conf=layer.config;
 					var div=$('#'+layer.div);
+					if (!conf.ans) {
+						conf.ans = {
+							"result":0, 
+							"msg":"Произошла ошибка.<br>Cообщение не отправлено..."
+						}
+					}
 					if(conf.ans.result){
 						div.find('textarea').val('').change();
+					}
+					var config = infra.config('contacts');
+					if (config.yaCounter) {
+						var ya = window['yaCounter' + config.yaCounter];
+						if (ya) ya.reachGoal(config.yaGoal, conf.ans)
 					}
 				}
 			});
