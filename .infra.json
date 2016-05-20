@@ -3,5 +3,6 @@
 	"dependencies":"event",
 	"yaCounter":"",
 	"yaGoal":"contacts",
-	"js":"showContacts.js"
+	"js":"showContacts.js",
+	"required":["name","text","phone"]
 }
