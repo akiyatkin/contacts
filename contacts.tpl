@@ -15,7 +15,8 @@
 				height:102px;
 			}
 		</style>
-		<form action="/-contacts/cont.php" method="post">
+		<form action="/-contacts/conth.php" method="post">
+			<input id="contacts_name" type="hidden" class="form-control"  value="1" name="antispam">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">

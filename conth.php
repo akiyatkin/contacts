@@ -31,6 +31,9 @@ else $email = $_POST['email'];
 if (empty($_POST['text'])) $text = '';
 else $text = $_POST['text'];
 
+if (empty($_POST['antispam'])) $antispam = '';
+else $antispam = $_POST['antispam'];
+if (!$antispam) return Ans::err($ans, 'Не пройдена проверка антиспам.');
 
 if (in_array('name', $conf['required'])) {
 	if (strlen($persona) < 2) return Ans::err($ans, 'Уточние, пожалуйста, вашем имя!');
@@ -38,7 +41,7 @@ if (in_array('name', $conf['required'])) {
 
 
 
-$is_email = preg_match('/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/',$email);
+$is_email = Mail::check($email);
 if ($is_email != true) return Ans::err($ans, 'Уточните, пожалуйста, адрес электронной почты!');
 
 if (in_array('text', $conf['required'])) {
