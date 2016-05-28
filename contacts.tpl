@@ -1,6 +1,9 @@
 {root:}
 	{:start}
 {title:}<h1>Форма для сообщений</h1>
+{form:}
+	{:body}
+	{:script}
 {start:}
 	{:title}
 	{:body}
