@@ -31,9 +31,38 @@ else $email = $_POST['email'];
 if (empty($_POST['text'])) $text = '';
 else $text = $_POST['text'];
 
+
+
+if($conf['reCAPTCHA']) {
+	if (empty($conf['reCAPTCHA_secret'])) return Ans::err($ans,'Ошибка на сервере некорректно настроена <a href="https://www.google.com/recaptcha">reCAPTCHA</a>');
+	if (empty($_POST['g-recaptcha-response'])) return Ans::err($ans,'Ошибка, не пройдена проверка антибот.');
+	$ip = $_SERVER['REMOTE_ADDR'];
+	
+	$paramsArray = array(
+		'secret' => $conf['reCAPTCHA_secret'], 
+		'response' => $_POST['g-recaptcha-response'],
+		'remoteip' => $ip
+	);
+	$vars = http_build_query($paramsArray); // преобразуем массив в URL-кодированную строку
+	$options = array( // создаем параметры контекста
+		'http' => array(  
+			'method'  => 'POST',  // метод передачи данных
+			'header'  => 'Content-type: application/x-www-form-urlencoded',  // заголовок 
+			'content' => $vars,  // переменные
+		)
+	);  
+	$context = stream_context_create($options);  // создаём контекст потока
+	$result = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context); //отправляем запрос
+	$result = Load::json_decode($result, true);
+	if (!$result || !$result['success']) {
+		return Ans::err($ans, 'Ошибка, не пройдена спам проверка.');
+	}
+}
+
 if (empty($_POST['antispam'])) $antispam = '';
 else $antispam = $_POST['antispam'];
 if (!$antispam) return Ans::err($ans, 'Не пройдена проверка антиспам.');
+
 
 if (in_array('name', $conf['required'])) {
 	if (strlen($persona) < 2) return Ans::err($ans, 'Уточние, пожалуйста, вашем имя!');

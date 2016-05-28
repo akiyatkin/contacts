@@ -9,6 +9,7 @@
 		"infrajs/popup": "~1",
 		"infrajs/mail": "~1",
 		"ded/domready": "~1",
+        "google/recaptcha": "~1",
 		"infrajs/controller": "~1"
     }
 }

@@ -19,6 +19,7 @@
 			}
 		</style>
 		<form action="/-contacts/conth.php" method="post">
+			
 			<input id="contacts_name" type="hidden" class="form-control"  value="1" name="antispam">
 			<div class="row">
 				<div class="col-sm-6">
@@ -52,10 +53,24 @@
 				<label for="contacts_text">Текст письма<span>*</span></label>
 				<textarea id="contacts_org" name="text" class="form-control" rows="3"></textarea>
 			</div>
+			{Config.get(:strcontacts).reCAPTCHA?:reCAPTCHA}
 			{config.ans.msg:alert}
 			<button type="submit" class="btn btn-default" onclick="if(window._gaq)_gaq.push(['_trackEvent','Кнопка','Оставить сообщение']);">Отправить</button>
 		</form>
 	</div>
+{reCAPTCHA:}
+	<div id="g-recaptcha-{id}-{counter}" style="margin-bottom:10px"></div>
+	<script>
+		domready(function(){
+			Event.one('reCAPTHCA', function () {
+				grecaptcha.render('g-recaptcha-{id}-{counter}', {
+					"sitekey" :"{Config.get(:strcontacts).reCAPTCHA_sitekey}"
+				});
+			})
+		});
+		
+	</script>
+{strcontacts:}contacts
 {script:}
 	<script>
 		domready(function(){
