@@ -4,8 +4,8 @@
 	"yaCounter":"",
 	"yaGoal":"contacts",
 	"reCAPTCHA":true,
-	"reCAPTCHA_secret":"6LewKiETAAAAAIJftuht-eOjsB1Sm-muvoKt3zUP",
-	"reCAPTCHA_sitekey":"6LewKiETAAAAAGI81o1OmuFa3kZTmgqast1r12wl",
+	"reCAPTCHA_secret":"",
+	"reCAPTCHA_sitekey":"",
 	"js":["showContacts.js","js.php"],
 	"tester":"tester.php",
 	"required":["name","text","phone"]
