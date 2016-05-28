@@ -1,44 +1,70 @@
 # Форма контактов для Infrajs
-**Disclaimer:** Module is not complete and not ready for use yet.
 
 ## Установка через composer.json
 
 ```json
 {
 	"require":{
+		"infrajs/infrajs":"~1",
 		"infrajs/contacts":"~1"
 	}
 }
 ```
 
-## Использование
-
+## Использование с [infrajs](https://github.com/infrajs/infrajs)
 ```html
-<span class="showContacts">Форма контактов</span>
+<script type="text/javascript" src="/-collect/?js"></script>
 ```
 
+Форма во всплывающем окне
+
 ```html
-<div id="showContacts"><!--Форма покажется тут--></div>
+<a href="/contacts" class="showContacts">Форма контактов</a>
 ```
 
+Форма на странице
+
+```html
+<div id="form"></div>
+<script>
+	domready( function () {
+		Event.one('Controller.onshow', function () {
+			Controller.check({
+				"div":"form",
+				"tplroot":"form",
+				"external":"-contacts/contacts.layer.json"
+			});
+		});
+	});
+</script>
+```
+
+## Тестирование
+
+В браузере открыть адрес /-contacts/tester.php
 
 ## Требования
 
-- Сайт должен работать через [infrajs/controller](https://github.com/infrajs/controller)
 - php > 5.4
 
 ## Параметры .infra.json
-
-Можно настроить цель для метрики. Срабатывает при любой отправки формы и при успешной и при ошибочной, когда, например, не все поля заполнены. Информация о результате сохраняется в параметрах визита. При успешной отправке в параметрах визита будет ```{ result:true }```
-Если всё настроено верно, то в консоли браузера будет сообщение о reachGoal.
 
 ```json
 
 {
 	"required": ["name","phone","text"],
-	"yaCounter":"Номер счётчика метрики"
+	"yaCounter":"Номер счётчика метрики",
+	"reCAPTCHA":false,
+	"reCAPTCHA-secret":"Секретный ключ",
+	"reCAPTCHA-sitekey":"Ключ для сайта"
 }
 ```
+Цель для метрики. Срабатывает при любой отправки формы и при успешной и при ошибочной, когда, например, не все поля заполнены. Информация о результате сохраняется в параметрах визита. При успешной отправке в параметрах визита будет ```{ result:true }```
+Если всё настроено верно, то в консоли браузера будет сообщение о reachGoal.
+
 В Яндекс.Метрике нужно создать JavaScript цель с идентификатором contacts.
 
 В свойстве required указывается какие поля обязательны для заполнения. Шаблон исправляется отдельно, если нужно убрать звёздочки. Шаблон копируется в корень проекта в папку contacts.
+
+### reCAPTCHA
+Необходима получить secret и sitekey https://www.google.com/recaptcha/intro/index.html
