@@ -17,10 +17,10 @@ if ($conf['reCAPTCHA']) {
 	$js = Cache::exec(array(), __FILE__, function ($date) {
 		return file_get_contents('https://www.google.com/recaptcha/api.js?onload=grecaptchaOnload&render=explicit&hl=ru');
 	}, array($date));
-	$js .= 'window.grecaptchaOnload=function(){ Event.fire("reCAPTHCA") };';
+	$js .= 'window.grecaptchaOnload=function(){ Event.fire("reCAPTCHA") };';
 
 } else {
-	$js = '/* reCAPTHCA отключена */';
+	$js = '/* reCAPTCHA отключена */';
 }
 
 return Ans::js($js);

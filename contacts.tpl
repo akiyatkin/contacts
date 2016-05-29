@@ -62,7 +62,7 @@
 	<div id="g-recaptcha-{id}-{counter}" style="margin-bottom:10px"></div>
 	<script>
 		domready(function(){
-			Event.one('reCAPTHCA', function () {
+			Event.one('reCAPTCHA', function () {
 				grecaptcha.render('g-recaptcha-{id}-{counter}', {
 					"sitekey" :"{Config.get(:strcontacts).reCAPTCHA_sitekey}"
 				});
