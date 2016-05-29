@@ -54,6 +54,7 @@ if($conf['reCAPTCHA']) {
 	$context = stream_context_create($options);  // создаём контекст потока
 	$result = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context); //отправляем запрос
 	$result = Load::json_decode($result, true);
+	$ans['reCAPTCHA'] = $result;
 	if (!$result || !$result['success']) {
 		return Ans::err($ans, 'Ошибка, не пройдена спам проверка.');
 	}
