@@ -3,7 +3,7 @@
 	"dependencies":"event",
 	"yaCounter":"",
 	"yaGoal":"contacts",
-	"reCAPTCHA":true,
+	"reCAPTCHA":false,
 	"reCAPTCHA_secret":"",
 	"reCAPTCHA_sitekey":"",
 	"js":["showContacts.js","js.php"],
