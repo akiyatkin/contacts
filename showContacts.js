@@ -5,7 +5,6 @@ window.contacts={
 		config:{}
 	},
 	show:function(){
-		infra.require('-popup/popup.js');
 		popup.open(this.popup);
 	},
 	popup:{},
