@@ -83,14 +83,11 @@ if (in_array('phone', $conf['required'])) {
 }
 
 	
-session_start();
-if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
-if (time() - $_SESSION['submit_time'] < 60) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
-$_SESSION['submit_time'] = time();
 
 
 
-$data=array();
+
+$data=$_POST;
 $data['email']=$email;
 $data['text']=$text;
 $data['name']=$persona;
@@ -117,6 +114,10 @@ if (trim(mb_strtolower($data['name'])) == 'itlife') {
 	$mdata['testmail'] = true;
 } else {
 	$mdata['testmail'] = false;
+	session_start();
+	if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
+	if (time() - $_SESSION['submit_time'] < 60) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
+	$_SESSION['submit_time'] = time();
 }
 $ans['testmail'] = $mdata['testmail'];
 
