@@ -58,11 +58,10 @@ if($conf['reCAPTCHA']) {
 	if (!$result || !$result['success']) {
 		return Ans::err($ans, 'Ошибка, не пройдена спам проверка.');
 	}
+	if (empty($_POST['antispam'])) $antispam = '';
+	else $antispam = $_POST['antispam'];
+	if (!$antispam) return Ans::err($ans, 'Не пройдена проверка антиспам.');
 }
-
-if (empty($_POST['antispam'])) $antispam = '';
-else $antispam = $_POST['antispam'];
-if (!$antispam) return Ans::err($ans, 'Не пройдена проверка антиспам.');
 
 
 if (in_array('name', $conf['required'])) {
