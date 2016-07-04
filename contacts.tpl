@@ -61,7 +61,7 @@
 		<textarea id="contacts_org" name="text" class="form-control" rows="3"></textarea>
 	</div>
 {reCAPTCHA:}
-	<div id="g-recaptcha-{id}-{counter}" style="margin-bottom:10px"></div>
+	<div style="overflow:hidden;" id="g-recaptcha-{id}-{counter}" style="margin-bottom:10px"></div>
 	<script>
 		domready(function(){
 			Event.one('reCAPTCHA', function () {
