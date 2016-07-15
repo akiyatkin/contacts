@@ -46,13 +46,13 @@
 		<div class="col-sm-6">
 			<div class="form-group">
 				<label for="contacts_email">Email<span>*</span></label>
-				<input id="contacts_email" type="email" class="form-control" value="{email}" name="email" id="email">
+				<input id="contacts_email" type="email" class="form-control" value="{email}" name="email">
 			</div>
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group">
 				<label for="contacts_phone">Телефон<span>*</span></label>
-				<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone" id="phone">
+				<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone">
 			</div>
 		</div>
 	</div>

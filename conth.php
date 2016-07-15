@@ -2,6 +2,7 @@
 namespace infrajs\contacts;
 use infrajs\path\Path;
 use infrajs\ans\Ans;
+use infrajs\view\View;
 use infrajs\load\Load;
 use infrajs\mail\Mail;
 use infrajs\template\Template;
@@ -81,22 +82,41 @@ if (in_array('phone', $conf['required'])) {
 	if (strlen($phone) < 6) return Ans::err($ans, 'Уточните, пожалуйста, номер телефона!');
 }
 
+
+
+if ($conf['file']) {
+	$file = $_FILES['file'];
+	if ($file['error']) {
+		if ($file['error'] == 1 || $file['error'] == 1 ) return Ans::err($ans, 'Приложен слишком большой файл.');
+		return Ans::log($ans, 'Ошибка '.$file['error'].'. Извините за неудобства, воспользуйтесь почтовым адресом.');
+	}
+	if (in_array('file', $conf['required'])) {
+		if (!$file) return Ans::err($ans, 'Приложите файл!');
+	}
+	if ($conf['filesize']) {
+		$size = $file['size']/(1000*1000);
+		if ($size>$conf['filesize']) return Ans::err($ans, 'Приложен слишком большой файл. Ограничение '.$conf['filesize'].' Mb');
+	}
+}
 	
 
 
 
 
-$data=$_POST;
-$data['email']=$email;
-$data['text']=$text;
-$data['name']=$persona;
-$data['post']=$_POST;
-$data['org']=@$_POST['org'];
-$data['phone']=@$_POST['phone'];
-$data['ip']=$_SERVER['REMOTE_ADDR'];
-$data['ref']=$_SERVER['HTTP_REFERER'];
-$data['browser']=$_SERVER['HTTP_USER_AGENT'];
-$data['time']=date("F j, Y, g:i a");
+$data = $_POST;
+$data['post'] 	= $_POST;
+
+$data['email'] 	= $email;
+$data['text'] 	= $text;
+$data['name'] 	= $persona;
+$data['schema'] = View::getSchema();
+$data['host']  	= View::getHost();
+$data['org']	= @$_POST['org'];
+$data['phone']	= @$_POST['phone'];
+$data['ip'] 	= $_SERVER['REMOTE_ADDR'];
+$data['ref'] 	= $_SERVER['HTTP_REFERER'];
+$data['browser'] = $_SERVER['HTTP_USER_AGENT'];
+$data['time'] 	= date("F j, Y, g:i a");
 
 
 
@@ -120,14 +140,29 @@ if (trim(mb_strtolower($data['name'])) == 'itlife') {
 }
 $ans['testmail'] = $mdata['testmail'];
 
+
+
+if ($maildir) {
+	$folder = Path::theme($maildir);
+	$name = Path::tofs(Path::encode($data['name']));
+	$fname = date('Y F j H-i').' '.$name.' '.time();
+	if ($conf['file'] && $file) {
+		$src = $folder.$fname.'.'.Path::tofs($file['name']);
+		$r = move_uploaded_file($file['tmp_name'], $src);
+		if (!$r) return Ans::err($ans, 'Неудалось загрузить файл');
+		$data['file'] = Path::toutf(Path::pretty($src));
+	}
+}
+
 $body = Template::parse('-contacts/mail.tpl', $data);
 if (!$body) $body = 'Ошибка. Не найден шаблон письма!';
 
 if ($maildir) {
-	$arg = $mdata;
-	$folder = Path::theme($maildir);
-	file_put_contents($folder.date('Y F j H-i').' '.time().'.txt',print_r($body, true)."\n\n\n\n\n".print_r($arg, true));
+	file_put_contents($folder.$fname.'.txt', print_r($body, true)."\n\n\n\n\n".print_r($mdata, true));
 }
+
+
+
 
 if (!isset($mdata['email_from'])) return Ans::err($ans, 'Ошибка с адресом получателя!');
 
