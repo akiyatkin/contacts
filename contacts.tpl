@@ -23,7 +23,7 @@
 			{:formbody}
 			{Config.get(:strcontacts).reCAPTCHA?:reCAPTCHA}
 			{config.ans.msg:alert}
-			<button type="submit" class="btn btn-default" onclick="if(window._gaq)_gaq.push(['_trackEvent','Кнопка','Оставить сообщение']);">Отправить</button>
+			<button type="submit" class="btn btn-default" onclick="if(window.ga)ga('send', 'event', 'Оставить сообщение', 'Клик');">Отправить</button>
 		</form>
 	</div>
 {formbody:}
