@@ -66,7 +66,7 @@ if($conf['reCAPTCHA']) {
 
 
 if (in_array('name', $conf['required'])) {
-	if (strlen($persona) < 2) return Ans::err($ans, 'Уточние, пожалуйста, вашем имя!');
+	if (strlen($persona) < 2) return Ans::err($ans, 'Уточние, пожалуйста, ваше имя!');
 }
 
 
