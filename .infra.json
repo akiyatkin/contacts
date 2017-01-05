@@ -1,8 +1,6 @@
 {
 	"pub":["yaCounter","yaGoal","reCAPTCHA","reCAPTCHA_sitekey","filesize"],
 	"dependencies":"event",
-	"yaCounter":"",
-	"yaGoal":"contacts",
 	"reCAPTCHA":false,
 	"reCAPTCHA_secret":"",
 	"reCAPTCHA_sitekey":"",

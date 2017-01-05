@@ -23,8 +23,29 @@
 			{:formbody}
 			{Config.get(:strcontacts).reCAPTCHA?:reCAPTCHA}
 			{config.ans.msg:alert}
-			<button type="submit" class="btn btn-default" onclick="if(window.ga)ga('send', 'event', 'Оставить сообщение', 'Клик');">Отправить</button>
+			<button type="submit" class="btn btn-default">Отправить</button>
 		</form>
+		<script>
+			domready( function () {
+				Event.one('Controller.onshow', function () {
+					var layer = Controller.ids["{id}"];
+					layer.onsubmit = function (layer) {
+						var ans = layer.config.ans;
+						if (!ans.result) return;
+						if (!Ya || !Ya._metrika.counter) {
+							var ya = Ya._metrika.counter;
+							console.info('ya.reachGoal contacts');
+							ya.reachGoal('contacts');
+						}
+						if (window.ga) {
+							console.info('ga send event contacts');
+							ga('send', 'event', 'contacts');
+							ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
+						}
+					}
+				});
+			});
+		</script>
 	</div>
 {formbody:}
 	<input id="contacts_name" type="hidden" class="form-control"  value="1" name="antispam">
