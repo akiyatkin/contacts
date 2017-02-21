@@ -32,7 +32,7 @@
 					layer.onsubmit = function (layer) {
 						var ans = layer.config.ans;
 						if (!ans.result) return;
-						if (!Ya || !Ya._metrika.counter) {
+						if (window.Ya && Ya._metrika.counter) {
 							var ya = Ya._metrika.counter;
 							console.info('ya.reachGoal contacts');
 							ya.reachGoal('contacts');
