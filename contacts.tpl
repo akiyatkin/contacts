@@ -18,34 +18,12 @@
 				height:102px;
 			}
 		</style>
-		<form action="/-contacts/conth.php" method="post">
-			
+		<form action="/-contacts/contb.php" method="post">
 			{:formbody}
 			{Config.get(:strcontacts).reCAPTCHA?:reCAPTCHA}
 			{config.ans.msg:alert}
 			<button type="submit" class="btn btn-default">Отправить</button>
 		</form>
-		<script>
-			domready( function () {
-				Event.one('Controller.onshow', function () {
-					var layer = Controller.ids["{id}"];
-					layer.onsubmit = function (layer) {
-						var ans = layer.config.ans;
-						if (!ans.result) return;
-						if (window.Ya && Ya._metrika.counter) {
-							var ya = Ya._metrika.counter;
-							console.info('ya.reachGoal contacts');
-							ya.reachGoal('contacts');
-						}
-						if (window.ga) {
-							console.info('ga send event contacts');
-							ga('send', 'event', 'contacts');
-							ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
-						}
-					}
-				});
-			});
-		</script>
 	</div>
 {formbody:}
 	<input id="contacts_name" type="hidden" class="form-control"  value="1" name="antispam">
@@ -96,10 +74,31 @@
 {strcontacts:}contacts
 {script:}
 	<script>
+		domready( function () {
+			Event.one('Controller.onshow', function () {
+				var layer = Controller.ids["{id}"];
+				layer.onsubmit = function (layer) {
+					var ans = layer.config.ans;
+					if (!ans.result) return;
+					if (window.Ya && Ya._metrika.counter) {
+						var ya = Ya._metrika.counter;
+						console.info('ya.reachGoal contacts');
+						ya.reachGoal('contacts');
+					}
+					if (window.ga) {
+						console.info('ga send event contacts');
+						ga('send', 'event', 'contacts');
+						ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
+					}
+				}
+			});
+		});
+	</script>
+	<script>
 		domready(function(){
-			if(window.infra&&window.popup)Event.one('Controller.oncheck', function(){
+			if (window.Event && window.Controller) Event.one('Controller.oncheck', function () {
 				if (popup.st) infrajs.popup_memorize('contacts.show()');
-				var layer=infrajs.ids['{id}'];
+				var layer = Controller.ids['{id}'];
 				layer.onsubmit = function (layer) {
 					var conf=layer.config;
 					var div=$('#'+layer.div);
@@ -111,14 +110,6 @@
 					}
 					if(conf.ans.result){
 						div.find('textarea').val('').change();
-					}
-					var config = infra.config('contacts');
-					if (config.yaCounter) {
-						var ya = window['yaCounter' + config.yaCounter];
-						if (ya) {
-							console.info('reachGoal');
-							ya.reachGoal(config.yaGoal, conf.ans)
-						}
 					}
 				}
 			});
