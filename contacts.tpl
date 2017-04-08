@@ -4,6 +4,7 @@
 {form:}
 	{:body}
 	{:script}
+{ans::}-ans/ans.tpl
 {start:}
 	{:title}
 	{:body}
@@ -21,7 +22,7 @@
 		<form action="/-contacts/contb.php" method="post">
 			{:formbody}
 			{Config.get(:strcontacts).reCAPTCHA?:reCAPTCHA}
-			{config.ans.msg:alert}
+			{config.ans:ans.msg}
 			<button type="submit" class="btn btn-default">Отправить</button>
 		</form>
 	</div>
@@ -115,7 +116,3 @@
 			});
 		});
 	</script>
-{alert:}
-<div class="alert {..result?:as?:ad}">{.}</b></div>
-{as:}alert-success
-{ad:}alert-danger
