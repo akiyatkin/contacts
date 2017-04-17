@@ -13,19 +13,12 @@ if (!is_file('vendor/autoload.php')) {
 
 $conf = Config::get('contacts');
 
-if (!$conf['yaCounter']) {
-	$ans['class']='bg-warning';
-	$yc = 'Не указан счётчик Яндекс.Метрики с целью contacts. Config.contacts.yaCounter';
-} else {
-	$yc = 'Яндекс.Метрика указана';
-}
-
 if ($conf['reCAPTCHA']) {
-	if (empty($conf['reCAPTCHA_secret'])) return Ans::err($ans,'Для reCAPTCHA не указан secret.'.$yc);
-	if (empty($conf['reCAPTCHA_sitekey'])) return Ans::err($ans,'Для reCAPTCHA не указан sitekey.'.$yc);
+	if (empty($conf['reCAPTCHA_secret'])) return Ans::err($ans,'Для reCAPTCHA не указан secret.');
+	if (empty($conf['reCAPTCHA_sitekey'])) return Ans::err($ans,'Для reCAPTCHA не указан sitekey.');
 	
 } else {
 	$ans['class']='bg-warning';
-	return Ans::ret($ans,'<a href="https://www.google.com/recaptcha/intro/index.html">reCAPTCHA</a> отключена.'.$yc);
+	return Ans::ret($ans, '<a href="https://www.google.com/recaptcha/intro/index.html">reCAPTCHA</a> отключена.');
 }
 return Ans::ret($ans, $yc);
