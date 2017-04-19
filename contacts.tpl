@@ -75,27 +75,6 @@
 {strcontacts:}contacts
 {script:}
 	<script>
-		domready( function () {
-			Event.one('Controller.onshow', function () {
-				var layer = Controller.ids["{id}"];
-				layer.onsubmit = function (layer) {
-					var ans = layer.config.ans;
-					if (!ans.result) return;
-					if (window.Ya && Ya._metrika.counter) {
-						var ya = Ya._metrika.counter;
-						console.info('ya.reachGoal contacts');
-						ya.reachGoal('contacts');
-					}
-					if (window.ga) {
-						console.info('ga send event contacts');
-						ga('send', 'event', 'contacts');
-						ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
-					}
-				}
-			});
-		});
-	</script>
-	<script>
 		domready(function(){
 			if (window.Event && window.Controller) Event.one('Controller.oncheck', function () {
 				if (popup.st) infrajs.popup_memorize('contacts.show()');
@@ -111,6 +90,9 @@
 					}
 					if(conf.ans.result){
 						div.find('textarea').val('').change();
+						if (window.ga) {
+							ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
+						}
 					}
 				}
 			});

@@ -7,6 +7,7 @@
     	"infrajs/layer-autosave":"~1",
     	"infrajs/layer-autofocus":"~1",
 		"infrajs/popup": "~1",
+        "akiyatkin/goal":"~1",
         "infrajs/view": "~1",
 		"infrajs/mail": "~1",
 		"ded/domready": "~1",
