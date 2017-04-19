@@ -75,26 +75,30 @@
 {strcontacts:}contacts
 {script:}
 	<script>
-		domready(function(){
+		domready( function () {
 			if (window.Event && window.Controller) Event.one('Controller.oncheck', function () {
 				if (popup.st) infrajs.popup_memorize('contacts.show()');
 				var layer = Controller.ids['{id}'];
-				layer.onsubmit = function (layer) {
-					var conf=layer.config;
-					var div=$('#'+layer.div);
-					if (!conf.ans) {
-						conf.ans = {
-							"result":0, 
-							"msg":"Произошла ошибка.<br>Cообщение не отправлено..."
+
+				Once.exec('contacts.tpl', function () {
+					Event.handler('Layer.onsubmit', function (layer) {
+						var conf = layer.config;
+						var div = $('#'+layer.div);
+						if (!conf.ans) {
+							conf.ans = {
+								"result":0, 
+								"msg":"Произошла ошибка.<br>Cообщение не отправлено..."
+							}
 						}
-					}
-					if(conf.ans.result){
-						div.find('textarea').val('').change();
-						if (window.ga) {
-							ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
+						if (conf.ans.result) {
+							div.find('textarea').val('').change();
+							if (window.ga) {
+								ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
+							}
 						}
-					}
-				}
+					});
+				});
+
 			});
 		});
 	</script>
