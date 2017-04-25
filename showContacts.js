@@ -8,7 +8,7 @@ window.contacts={
 		var layer = this.popup;
 		popup.open(layer);
 		
-		Event.one('layer.onshow', function () {
+		Event.one('Layer.onshow', function () {
 			infrajs.popup_memorize('contacts.show()');
 		},'', layer);
 		
