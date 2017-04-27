@@ -92,9 +92,6 @@
 						}
 						if (conf.ans.result) {
 							div.find('textarea').val('').change();
-							if (window.ga) {
-								ga('send', 'event', 'Оставить сообщение', 'Клик');//depricated
-							}
 						}
 					});
 				});
