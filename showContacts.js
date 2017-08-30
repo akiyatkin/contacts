@@ -52,13 +52,20 @@ Event.handler('Controller.onshow',function(){
 	$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
 		if ($(this).data('text')) {
 			if (!Session.get('user.text')) {
-				Session.set('user.text', $(this).data('text'));
+				Session.set('user.text', $(this).data('text'), false, function(){
+					contacts.show();
+				});
 			}
 		}
 		if ($(this).data('replace')) {
-			Session.set('user.text', $(this).data('replace'));
+			console.log($(this).data('replace'));
+			Session.set('user.text', $(this).data('replace'), false, function(){
+				contacts.show();
+			});
+		} else {
+			contacts.show();	
 		}
-		contacts.show();
+		
 		return false;
 	});
 });
