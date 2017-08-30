@@ -58,7 +58,6 @@ Event.handler('Controller.onshow',function(){
 			}
 		}
 		if ($(this).data('replace')) {
-			console.log($(this).data('replace'));
 			Session.set('user.text', $(this).data('replace'), false, function(){
 				contacts.show();
 			});
