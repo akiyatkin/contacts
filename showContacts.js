@@ -48,23 +48,25 @@ contacts.extlayer.onsubmit = function (layer) {
 contacts.popup.external=contacts.extlayer;
 contacts.layer.external=contacts.extlayer;
 
-Event.handler('Controller.onshow',function(){
-	$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
-		if ($(this).data('text')) {
-			if (!Session.get('user.text')) {
-				Session.set('user.text', $(this).data('text'), false, function(){
+!function ($) {
+	Event.handler('Controller.onshow',function () {
+		$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
+			if ($(this).data('text')) {
+				if (!Session.get('user.text')) {
+					Session.set('user.text', $(this).data('text'), false, function(){
+						contacts.show();
+					});
+				}
+			}
+			if ($(this).data('replace')) {
+				Session.set('user.text', $(this).data('replace'), false, function(){
 					contacts.show();
 				});
+			} else {
+				contacts.show();	
 			}
-		}
-		if ($(this).data('replace')) {
-			Session.set('user.text', $(this).data('replace'), false, function(){
-				contacts.show();
-			});
-		} else {
-			contacts.show();	
-		}
-		
-		return false;
+			
+			return false;
+		});
 	});
-});
+}(jQuery);
