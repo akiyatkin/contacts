@@ -6,10 +6,12 @@ use infrajs\config\Config;
 use akiyatkin\boo\Cache;
 
 $conf = Config::get('contacts');
-if (!$conf['reCAPTCHA']) {
-	$js = Cache::exec('Скрипт Google reCAPTHA', function () {
+
+if ($conf['reCAPTCHA']) {
+	$js = Cache::func( function () {
 		return file_get_contents('https://www.google.com/recaptcha/api.js?onload=grecaptchaOnload&render=explicit&hl=ru');
-	}, array(), ['akiyatkin\boo\Cache','getDurationTime'], array('last friday'));
+	}, [], ['akiyatkin\boo\Cache','getDurationTime'], array('last friday'));
+
 	$js .= 'window.grecaptchaOnload=function(){ Event.fire("reCAPTCHA") };';
 
 } else {
