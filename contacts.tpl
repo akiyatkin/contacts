@@ -21,7 +21,7 @@
 		</style>
 		<form action="/-contacts/contb.php" method="post">
 			{:formbody}
-			{Config.get(:strcontacts).reCAPTCHA?:reCAPTCHA}
+			{~conf.recaptcha?:reCAPTCHA}
 			{config.ans:ans.msg}
 			<button type="submit" class="btn btn-default">Отправить</button>
 		</form>
@@ -66,13 +66,12 @@
 		domready(function(){
 			Event.one('reCAPTCHA', function () {
 				grecaptcha.render('g-recaptcha-{id}-{counter}', {
-					"sitekey" :"{Config.get(:strcontacts).reCAPTCHA_sitekey}"
+					"sitekey" :"{~conf.recaptcha.sitekey}"
 				});
 			})
 		});
 		
 	</script>
-{strcontacts:}contacts
 {script:}
 	<script>
 		domready( function () {

@@ -1,13 +1,9 @@
 {
-	"pub":["yaCounter","yaGoal","reCAPTCHA","reCAPTCHA_sitekey","filesize"],
+	"pub":["yaCounter","yaGoal","filesize"],
 	"dependencies":"event",
-	"reCAPTCHA":false,
-	"reCAPTCHA_secret":"",
-	"reCAPTCHA_sitekey":"",
-	"js":["showContacts.js","js.php"],
+	"js":["showContacts.js"],
 	"tester":"tester.php",
 	"required":["name","text","phone"],
-	
 	"file":false,
 	"filesize":5
 }
