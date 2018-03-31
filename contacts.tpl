@@ -66,12 +66,13 @@
 		domready(function(){
 			Event.one('reCAPTCHA', function () {
 				grecaptcha.render('g-recaptcha-{id}-{counter}', {
-					"sitekey" :"{~conf.recaptcha.sitekey}"
+					"sitekey" :"{Config.get(:strrecaptcha).sitekey}"
 				});
 			})
 		});
 		
 	</script>
+	{strrecaptcha:}recaptcha
 {script:}
 	<script>
 		domready( function () {
