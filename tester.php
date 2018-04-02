@@ -6,11 +6,11 @@ use infrajs\config\Config;
 use infrajs\cache\Cache;
 
 
-$conf = Config::get('contacts');
+$conf = Config::get('recaptcha');
 $ans = array(); 
-if ($conf['reCAPTCHA']) {
-	if (empty($conf['reCAPTCHA_secret'])) return Ans::err($ans,'Для reCAPTCHA не указан secret.');
-	if (empty($conf['reCAPTCHA_sitekey'])) return Ans::err($ans,'Для reCAPTCHA не указан sitekey.');
+if (empty($conf['off'])) {
+	if (empty($conf['secret'])) return Ans::err($ans,'Для reCAPTCHA не указан secret.');
+	if (empty($conf['sitekey'])) return Ans::err($ans,'Для reCAPTCHA не указан sitekey.');
 	
 } else {
 	$ans['class']='bg-warning';
