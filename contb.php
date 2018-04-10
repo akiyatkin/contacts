@@ -92,7 +92,7 @@ $data['time'] 	= date("F j, Y, g:i a");
 
 
 
-$maildir = Path::resolve('~.contacts/');	
+$maildir = Path::resolve('~auto/.contacts/');	
 if (!is_dir($maildir)) mkdir($maildir);
 
 $mdata = array();
