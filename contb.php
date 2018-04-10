@@ -91,7 +91,6 @@ $data['browser'] = $_SERVER['HTTP_USER_AGENT'];
 $data['time'] 	= date("F j, Y, g:i a");
 
 
-
 $maildir = Path::resolve('~auto/.contacts/');	
 if (!is_dir($maildir)) mkdir($maildir);
 
