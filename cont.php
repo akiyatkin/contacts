@@ -10,12 +10,6 @@ use infrajs\router\Router;
 use infrajs\config\Config;
 use akiyatkin\recaptcha\Recaptcha;
 
-if (!is_file('vendor/autoload.php')) {
-	chdir('../../../'); //Согласно фактическому расположению файла
-	require_once('vendor/autoload.php');
-	Router::init();
-}
-
 $conf = Config::get('contacts');
 
 $ans = array();

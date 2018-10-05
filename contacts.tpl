@@ -19,15 +19,14 @@
 				height:102px;
 			}
 		</style>
-		<form action="/-contacts/contb.php" method="post">
+		<form action="/-contacts/cont.php" method="post">
 			{:formbody}
 			{~conf.recaptcha?:reCAPTCHA}
 			{config.ans:ans.msg}
-			<button type="submit" class="btn btn-default">Отправить</button>
+			<button type="submit" class="btn btn-success">Отправить</button>
 		</form>
 	</div>
 {formbody:}
-	<input id="contacts_name" type="hidden" class="form-control"  value="1" name="antispam">
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
