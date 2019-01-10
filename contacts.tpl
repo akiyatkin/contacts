@@ -23,41 +23,42 @@
 			{:formbody}
 			{~conf.recaptcha?:reCAPTCHA}
 			{config.ans:ans.msg}
-			<button type="submit" class="btn btn-success">Отправить</button>
+			{:submit}
 		</form>
 	</div>
+{submit:}<button type="submit" class="btn btn-success">Отправить</button>
 {formbody:}
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
-				<label for="contacts_name">Контактное лицо<span>*&nbsp;</span></label>
-				<input id="contacts_name" type="text" class="form-control"  value="{name}" name="name">
+				<label for="contacts_name">Контактное лицо <span>*</span></label>
+				<input id="contacts_name" type="text" class="form-control" value="{name}" name="name">
 			</div>
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group">
 				<label for="contacts_org">Организация</label>
-				<input id="contacts_org" type="text" class="form-control"  value="{org}" name="org">
+				<input id="contacts_org" type="text" class="form-control" value="{org}" name="org">
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
-				<label for="contacts_email">Email<span>*</span></label>
+				<label for="contacts_email">Email <span>*</span></label>
 				<input id="contacts_email" type="email" class="form-control" value="{email}" name="email">
 			</div>
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group">
-				<label for="contacts_phone">Телефон<span>*</span></label>
+				<label for="contacts_phone">Телефон <span>*</span></label>
 				<input id="contacts_phone" type="tel" class="form-control" value="{phone}" name="phone">
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="contacts_text">Текст письма<span>*</span></label>
-		<textarea id="contacts_org" name="text" class="form-control" rows="3"></textarea>
+		<label for="contacts_text">Текст письма <span>*</span></label>
+		<textarea id="contacts_text" name="text" class="form-control" rows="3"></textarea>
 	</div>
 {reCAPTCHA:}
 	<div style="overflow:hidden; margin-bottom:10px" id="g-recaptcha-{id}-{counter}"></div>
@@ -92,7 +93,7 @@
 						if (conf.ans.result) {
 							div.find('textarea').val('').change();
 						}
-					});
+					}, '-contacts', layer);
 				});
 
 			});

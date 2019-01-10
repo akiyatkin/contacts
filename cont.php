@@ -32,9 +32,8 @@ $r = Recaptcha::check();
 if (!$r) return Ans::err($ans,'Ошибка, не пройдена проверка антибот.');
 
 if (in_array('name', $conf['required'])) {
-	if (strlen($persona) < 2) return Ans::err($ans, 'Уточние, пожалуйста, ваше имя!');
+	if (strlen($persona) < 2) return Ans::err($ans, 'Уточните, пожалуйста, ваше имя!');
 }
-
 
 
 $is_email = Mail::check($email);
@@ -123,7 +122,7 @@ $body = Template::parse('-contacts/mail.tpl', $data);
 if (!$body) $body = 'Ошибка. Не найден шаблон письма!';
 
 if ($maildir) {
-	file_put_contents($folder.$fname.'.txt', print_r($body, true)."\n\n\n\n\n".print_r($mdata, true));
+	@file_put_contents($folder.$fname.'.txt', print_r($body, true)."\n\n\n\n\n".print_r($mdata, true));
 }
 
 
