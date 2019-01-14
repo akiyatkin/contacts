@@ -31,6 +31,10 @@ else $text = $_POST['text'];
 $r = Recaptcha::check();
 if (!$r) return Ans::err($ans,'Ошибка, не пройдена проверка антибот.');
 
+if ($conf['terms']) {
+	if (empty($_POST['terms'])) return Ans::err($ans, 'Вам нужно принять политику конфиденциальности!');
+}
+
 if (in_array('name', $conf['required'])) {
 	if (strlen($persona) < 2) return Ans::err($ans, 'Уточните, пожалуйста, ваше имя!');
 }

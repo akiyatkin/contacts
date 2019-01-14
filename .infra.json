@@ -3,6 +3,7 @@
 	"dependencies":"event",
 	"js":["showContacts.js"],
 	"tester":"tester.php",
+	"terms":false,
 	"required":["name","text","phone"],
 	"file":false,
 	"filesize":5

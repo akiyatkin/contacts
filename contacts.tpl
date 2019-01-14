@@ -60,6 +60,11 @@
 		<label for="contacts_text">Текст письма <span>*</span></label>
 		<textarea id="contacts_text" name="text" class="form-control" rows="3"></textarea>
 	</div>
+{~conf.contacts.terms?:terms}
+{terms:}
+	<div class="form-group">
+		<input type="checkbox" name="terms"> Я принимаю условия <a href="{~conf.contacts.terms}">политики конфиденциальности</a>.
+	</div>
 {reCAPTCHA:}
 	<div style="overflow:hidden; margin-bottom:10px" id="g-recaptcha-{id}-{counter}"></div>
 	<script>
