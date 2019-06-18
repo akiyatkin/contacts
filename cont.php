@@ -134,7 +134,8 @@ if ($maildir) {
 
 if (!isset($mdata['email_from'])) return Ans::err($ans, 'Ошибка с адресом получателя!');
 
-$r = Mail::toAdmin($mdata['subject'], $mdata['email_from'], $body, $mdata['testmail']);
+//$r = Mail::toAdmin($mdata['subject'], $mdata['email_from'], $body, $mdata['testmail']);
+$r = Mail::html($mdata['subject'], '<pre>'.$body.'</pre>', $mdata['email_from'], true);//from to
 
 if (!$r) return Ans::err($ans,"Неудалось отправить письмо из-за ошибки на сервере!");
 
