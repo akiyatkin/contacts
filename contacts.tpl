@@ -70,6 +70,8 @@
 	<script>
 		domready(function(){
 			Event.one('reCAPTCHA', function () {
+				var div = $('#g-recaptcha-{id}-{counter}');
+				if (!div.length) return;
 				grecaptcha.render('g-recaptcha-{id}-{counter}', {
 					"sitekey" :"{Config.get(:strrecaptcha).sitekey}"
 				});
