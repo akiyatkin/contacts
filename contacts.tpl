@@ -21,7 +21,7 @@
 		</style>
 		<form action="/-contacts/cont.php" method="post">
 			{:formbody}
-			{~conf.recaptcha?:reCAPTCHA}
+			<div style="margin-bottom:10px">{~conf.recaptcha?:reCAPTCHA}</div>
 			{config.ans:ans.msg}
 			{:submit}
 		</form>
@@ -66,7 +66,7 @@
 		<input type="checkbox" name="terms"> Я принимаю условия <a href="{~conf.contacts.terms}">политики конфиденциальности</a>.
 	</div>
 {reCAPTCHA:}
-	<div style="overflow:hidden; margin-bottom:10px" id="g-recaptcha-{id}-{counter}"></div>
+	<div style="overflow:hidden;" id="g-recaptcha-{id}-{counter}"></div>
 	<script>
 		domready(function(){
 			Event.one('reCAPTCHA', function () {
