@@ -1,6 +1,12 @@
 {root:}
+	{:breadcrumb}
 	{:start}
 {title:}<h1>Форма для сообщений</h1>
+{breadcrumb:}
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Главная</a></li>
+		<li class="active breadcrumb-item">Форма для сообщений</li>
+	</ol>
 {form:}
 	{:body}
 	{:script}
