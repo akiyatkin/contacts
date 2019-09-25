@@ -1,5 +1,4 @@
 {
-	"tplroot":"root",
 	"goal":"contacts",
 	"tpl":"-contacts/contacts.tpl",
 	"autofocus":true,

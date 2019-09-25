@@ -1,6 +1,7 @@
 window.contacts={
 	extlayer:{
 		divs:{},
+		tplroot:"start",
 		external:'-contacts/contacts.layer.json',
 		config:{}
 	},

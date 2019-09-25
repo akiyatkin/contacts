@@ -2,6 +2,7 @@
 	"pub":["yaCounter","yaGoal","filesize","terms"],
 	"dependencies":"event",
 	"js":["showContacts.js"],
+	"css":["contacts.css"],
 	"tester":"tester.php",
 	"terms":false,
 	"required":["name","text","phone"],
