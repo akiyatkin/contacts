@@ -5,12 +5,16 @@ window.contacts={
 		external:'-contacts/contacts.layer.json',
 		config:{}
 	},
-	show:function(){
+	show:function(data){
 		var layer = this.popup;
-		popup.open(layer);
 		
+		if (!layer.config) layer.config = {};
+		layer.config.data = data;
+
+		popup.open(layer);
+
 		Event.one('Layer.onshow', function () {
-			infrajs.popup_memorize('contacts.show()');
+			infrajs.popup_memorize("contacts.show("+JSON.stringify(data)+")");
 		},'', layer);
 		
 	},
@@ -52,19 +56,20 @@ contacts.layer.external=contacts.extlayer;
 !function ($) {
 	Event.handler('Controller.onshow',function () {
 		$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
+			var data = $(this).data();
 			if ($(this).data('text')) {
 				if (!Session.get('user.text')) {
 					Session.set('user.text', $(this).data('text'), false, function(){
-						contacts.show();
+						contacts.show(data);
 					});
 				}
 			}
 			if ($(this).data('replace')) {
 				Session.set('user.text', $(this).data('replace'), false, function(){
-					contacts.show();
+					contacts.show(data);
 				});
 			} else {
-				contacts.show();	
+				contacts.show(data);	
 			}
 			
 			return false;

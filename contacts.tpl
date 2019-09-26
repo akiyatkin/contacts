@@ -92,7 +92,6 @@
 	<script>
 		domready( function () {
 			if (window.Event && window.Controller) Event.one('Controller.oncheck', function () {
-				if (popup.st) infrajs.popup_memorize('contacts.show()');
 				var layer = Controller.ids['{id}'];
 
 				Once.exec('contacts.tpl', function () {
