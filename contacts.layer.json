@@ -1,5 +1,6 @@
 {
 	"goal":"contacts",
+	"data":true,
 	"tpl":"-contacts/contacts.tpl",
 	"autofocus":true,
 	"onsubmit":true,
