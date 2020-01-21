@@ -69,13 +69,20 @@
 		<textarea id="contacts_text" name="text" class="form-control" rows="3"></textarea>
 	</div>
 {~conf.contacts.terms?:terms}
-{terms:}
+{terms2:}
 	
 	<div class="custom-control custom-checkbox mb-2">
 		<input class="custom-control-input" autosave="false" type="checkbox" name="terms" id="customCheck{id}">
 		<label class="custom-control-label" for="customCheck{id}"> Я принимаю условия <a href="{~conf.contacts.terms}">политики конфиденциальности</a>.</label>
 	</div>
-	
+{terms:}
+	<div class="custom-control custom-checkbox mb-2">
+		<input class="custom-control-input" checked type="checkbox" name="terms" id="customCheck{id}">
+		<label class="custom-control-label" for="customCheck{id}"> 
+			Я даю свое согласие на обработку персональных данных, согласно <a href="{~conf.contacts.terms}">политике конфиденциальности</a>.
+		</label>
+	</div>
+
 {reCAPTCHA:}
 	<div style="overflow:hidden;" id="g-recaptcha-{id}-{counter}"></div>
 	<script>
