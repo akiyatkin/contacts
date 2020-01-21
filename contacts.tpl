@@ -70,9 +70,12 @@
 	</div>
 {~conf.contacts.terms?:terms}
 {terms:}
-	<div class="form-group">
-		<input type="checkbox" name="terms"> Я принимаю условия <a href="{~conf.contacts.terms}">политики конфиденциальности</a>.
+	
+	<div class="custom-control custom-checkbox mb-2">
+		<input class="custom-control-input" autosave="false" type="checkbox" name="terms" id="customCheck{id}">
+		<label class="custom-control-label" for="customCheck{id}"> Я принимаю условия <a href="{~conf.contacts.terms}">политики конфиденциальности</a>.</label>
 	</div>
+	
 {reCAPTCHA:}
 	<div style="overflow:hidden;" id="g-recaptcha-{id}-{counter}"></div>
 	<script>
