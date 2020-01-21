@@ -27,13 +27,14 @@ else $email = $_POST['email'];
 if (empty($_POST['text'])) $text = '';
 else $text = $_POST['text'];
 
+if ($conf['terms']) {
+	if (empty($_POST['terms'])) return Ans::err($ans, 'Вам нужно принять политику конфиденциальности!');
+}
 
 $r = Recaptcha::check();
 if (!$r) return Ans::err($ans,'Ошибка, не пройдена проверка антибот.');
 
-if ($conf['terms']) {
-	if (empty($_POST['terms'])) return Ans::err($ans, 'Вам нужно принять политику конфиденциальности!');
-}
+
 
 if (in_array('name', $conf['required'])) {
 	if (strlen($persona) < 2) return Ans::err($ans, 'Уточните, пожалуйста, ваше имя!');
