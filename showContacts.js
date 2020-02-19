@@ -53,26 +53,25 @@ contacts.extlayer.onsubmit = function (layer) {
 contacts.popup.external=contacts.extlayer;
 contacts.layer.external=contacts.extlayer;
 
-!function ($) {
-	Event.handler('Controller.onshow',function () {
-		$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
-			var data = $(this).data();
-			if ($(this).data('text')) {
-				if (!Session.get('user.text')) {
-					Session.set('user.text', $(this).data('text'), false, function(){
-						contacts.show(data);
-					});
-				}
-			}
-			if ($(this).data('replace')) {
-				Session.set('user.text', $(this).data('replace'), false, function(){
+
+Event.handler('Controller.onshow',function () {
+	$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
+		var data = $(this).data();
+		if ($(this).data('text')) {
+			if (!Session.get('user.text')) {
+				Session.set('user.text', $(this).data('text'), false, function(){
 					contacts.show(data);
 				});
-			} else {
-				contacts.show(data);	
 			}
-			
-			return false;
-		});
+		}
+		if ($(this).data('replace')) {
+			Session.set('user.text', $(this).data('replace'), false, function(){
+				contacts.show(data);
+			});
+		} else {
+			contacts.show(data);	
+		}
+		
+		return false;
 	});
-}(jQuery);
+});
