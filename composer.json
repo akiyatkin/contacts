@@ -10,7 +10,6 @@
 		"akiyatkin/boo":"~1",
 		"infrajs/view": "~1",
 		"infrajs/mail": "~1",
-		"ded/domready": "~1",
 		"akiyatkin/recaptcha":"~1",
 		"infrajs/controller": "~1"
 	}
