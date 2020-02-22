@@ -53,7 +53,9 @@ contacts.extlayer.onsubmit = function (layer) {
 contacts.popup.external=contacts.extlayer;
 contacts.layer.external=contacts.extlayer;
 
-
+contacts.callback_layer = {
+	"external":"-contacts/callback/layer.json"
+}
 Event.handler('Controller.onshow',function () {
 	$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
 		var data = $(this).data();
@@ -74,4 +76,18 @@ Event.handler('Controller.onshow',function () {
 		
 		return false;
 	});
+
+
+	
+	let cls = cls => document.getElementsByClassName(cls)
+	let list = cls('showCallback')
+	for (let i = 0, l = list.length; i < l; i++ ) {
+		let el = list[i]
+		if (el.showCallback) continue
+		el.showCallback = true
+		el.addEventListener('click', () => {
+			Popup.show(contacts.callback_layer);
+		})
+	}
+
 });

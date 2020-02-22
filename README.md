@@ -12,6 +12,7 @@
 ```
 
 ## Использование с [infrajs](https://github.com/infrajs/infrajs)
+
 ```html
 <script type="text/javascript" src="/-collect/?js"></script>
 ```
@@ -38,34 +39,12 @@
 	});
 </script>
 ```
-
-## Тестирование
-
-В браузере открыть адрес /-contacts/tester.php
-
-## Требования
-
-- php > 5.4
-
-## Параметры .infra.json
-
-```json
-
-{
-	"required": ["name","phone","text"],
-	"reCAPTCHA":false,
-	"reCAPTCHA_secret":"Секретный ключ",
-	"reCAPTCHA_sitekey":"Ключ для сайта",
-	"file":false
-	"filesize":5
-}
+## Перезвонить
+```js
+Popup.show({
+	"external":"-contacts/callback/layer.json"
+});
 ```
-В Яндекс.Метрике и Аналитике нужно создать JavaScript цель с идентификатором contacts в Метрике и Категорией contacts в Analytics (Действие и Ярлык не указываются).
-
-В свойстве required указывается какие поля обязательны для заполнения. Шаблон исправляется отдельно, если нужно убрать звёздочки. Шаблон копируется в корень проекта в папку contacts.
-
-### reCAPTCHA
-Необходима получить secret и sitekey https://www.google.com/recaptcha/intro/index.html
 
 ### file=true
 Опция позволяет прикреплять к сообщению файл, который будет сохранён в папке .contacts/ рядом с самим собщением.

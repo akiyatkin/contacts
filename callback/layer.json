@@ -1,0 +1,7 @@
+{
+	"onsubmit":true,
+	"autosavename":"user",
+	"goal":"contacts",
+	"data":true,
+	"tpl":"-contacts/callback/layout.tpl"
+}
