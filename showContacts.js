@@ -57,8 +57,7 @@ contacts.callback_layer = {
 	"external":"-contacts/callback/layer.json"
 }
 Event.handler('Controller.onshow', async () => {
-	let Load = (await import('/vendor/akiyatkin/load/Load.js')).default
-	let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+	let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
 	await CDN.load('jquery');
 	$('.showContacts[showContacts!=true]').attr('infra','false').attr('showContacts','true').click( function() {
 		var data = $(this).data();
