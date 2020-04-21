@@ -5,8 +5,10 @@ window.contacts={
 		external:'-contacts/contacts.layer.json',
 		config:{}
 	},
-	show:function(data){
-		var layer = this.popup;
+	show:async function(data){
+		let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
+		await CDN.load('jquery')
+		var layer = this.popup
 		
 		if (!layer.config) layer.config = {};
 		layer.config.data = data;
