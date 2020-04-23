@@ -118,7 +118,7 @@ if ($maildir) {
 	if ($conf['file'] && $file) {
 		$src = $folder.$fname.'.'.Path::tofs($file['name']);
 		$r = move_uploaded_file($file['tmp_name'], $src);
-		if (!$r) return Ans::err($ans, 'Неудалось загрузить файл');
+		if (!$r) return Ans::err($ans, 'Не удалось загрузить файл');
 		$data['file'] = Path::toutf(Path::pretty($src));
 	}
 }
@@ -138,6 +138,6 @@ if (!isset($mdata['email_from'])) return Ans::err($ans, 'Ошибка с адр�
 //$r = Mail::toAdmin($mdata['subject'], $mdata['email_from'], $body, $mdata['testmail']);
 $r = Mail::html($mdata['subject'], '<pre>'.$body.'</pre>', $mdata['email_from'], true);//from to
 
-if (!$r) return Ans::err($ans,"Неудалось отправить письмо из-за ошибки на сервере!");
+if (!$r) return Ans::err($ans,"Не удалось отправить письмо из-за ошибки на сервере!");
 
 return Ans::ret($ans, "Письмо отправлено!<blockquote>".$data['text']."</blockquote>");
