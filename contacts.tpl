@@ -79,7 +79,7 @@
 	<div class="custom-control custom-checkbox mb-2">
 		<input class="custom-control-input" checked type="checkbox" name="terms" id="customCheck{id}">
 		<label class="custom-control-label" for="customCheck{id}"> 
-			Я даю свое согласие на обработку персональных данных, согласно <a href="{~conf.contacts.terms}">политике конфиденциальности</a>.
+			Я даю согласие на обработку персональных данных, согласно <a href="{~conf.contacts.terms}">политике конфиденциальности</a>.
 		</label>
 	</div>
 
