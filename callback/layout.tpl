@@ -19,7 +19,7 @@
 	{:logo}
 	<h1>Заказать звонок</h1>
 	<p>Оставьте свой номер и мы перезвоним в рабочее время.</p>
-	<form method="post" action="/-contacts/callback/phone.php">
+	<form method="post" action="/-contacts/callback/">
 		<p><input name="phone" type="tel" class="form-control" placeholder="+7 (999) 999 99 99"></p>
 
 			{~conf.contacts.terms?:cont.terms}
