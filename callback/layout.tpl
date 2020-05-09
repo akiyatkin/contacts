@@ -40,11 +40,9 @@
 			if (!layer) return true
 			return layer.counter == {counter}
 		}
-		console.log(layer)
 		Layer.hand('submit', async (l) => {
 			if (!iscontext()) return
 			if (l != layer) return
-			alert(1)
 			let token = await reCAPTCHA.execute('contacts')
 			let inp = document.createElement("input")
 			inp.type = "hidden"
