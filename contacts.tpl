@@ -84,18 +84,33 @@
 	</div>
 
 {reCAPTCHA:}
-	<div style="overflow:hidden;" id="g-recaptcha-{id}-{counter}"></div>
-	<script>
-		domready(function(){
-			Event.one('reCAPTCHA', function () {
-				var div = $('#g-recaptcha-{id}-{counter}');
-				if (!div.length) return;
-				grecaptcha.render('g-recaptcha-{id}-{counter}', {
-					"sitekey" :"{Config.get(:strrecaptcha).sitekey}"
-				});
-			})
-		});
+	<input type="hidden" name="g-recaptcha-token" class="g-recaptcha-token">
+	<script async type="module">
+		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
+		import { Controller } from '/vendor/infrajs/controller/src/Controller.js'	
+		import { Layer } from '/vendor/infrajs/controller/src/Layer.js'
+
+		let div = document.getElementById('{div}')
+		let tag = tag => div.getElementsByTagName(tag)[0]
+		let form = tag('form')
+		let layer = Controller.ids[{id}]
 		
+		let iscontext = () => {
+			let layer = Controller.ids[{id}]
+			if (!layer) return true
+			return layer.counter == {counter}
+		}
+
+		Layer.hand('submit', async (l) => {
+			if (!iscontext()) return
+			if (l != layer) return
+			let token = await reCAPTCHA.execute('contacts')
+			let inp = document.createElement("input")
+			inp.type = "hidden"
+			inp.name = "g-recaptcha-token"
+			inp.value = token
+			form.appendChild(inp)
+		})
 	</script>
 	{strrecaptcha:}recaptcha
 {script:}

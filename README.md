@@ -27,14 +27,14 @@
 
 ```html
 <div id="form"></div>
-<script>
-	domready( function () {
-		Event.one('Controller.onshow', function () {
-			Controller.check({
-				"div":"form",
-				"tplroot":"form",
-				"external":"-contacts/contacts.layer.json"
-			});
+<script async type="module">
+	import { Event } from '/vendor/infrajs/event/Event.js'
+	import { Controller } from '/vendor/infrajs/controller/src/Controller.js'	
+	Event.one('Controller.onshow', function () {
+		Controller.check({
+			"div":"form",
+			"tplroot":"form",
+			"external":"-contacts/contacts.layer.json"
 		});
 	});
 </script>

@@ -8,7 +8,7 @@ use infrajs\mail\Mail;
 use infrajs\template\Template;
 use infrajs\router\Router;
 use infrajs\config\Config;
-use akiyatkin\recaptcha\Recaptcha;
+use akiyatkin\recaptcha\reCAPTCHA;
 
 $conf = Config::get('contacts');
 
@@ -31,7 +31,7 @@ if ($conf['terms']) {
 	if (empty($_POST['terms'])) return Ans::err($ans, 'Вам нужно принять политику конфиденциальности!');
 }
 
-$r = Recaptcha::check();
+$r = reCAPTCHA::check();
 if (!$r) return Ans::err($ans,'Ошибка, не пройдена проверка антибот.');
 
 

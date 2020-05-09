@@ -2,7 +2,7 @@
 use infrajs\ans\Ans;
 use infrajs\mail\Mail;
 use infrajs\config\Config;
-use akiyatkin\recaptcha\Recaptcha;
+use akiyatkin\recaptcha\reCAPTCHA;
 
 if (isset($_POST["phone"])) {
 	$phone = $_POST["phone"];
@@ -19,7 +19,7 @@ if (!empty($contconf['terms'])) {
 $ans['phone'] = $phone;
 if (strlen($phone) < 6 ) return Ans::err($ans,'Уточните ваш телефон!');
 
-$r = Recaptcha::check();
+$r = reCAPTCHA::check();
 if (!$r) return Ans::err($ans,'Ошибка, не пройдена защита от спама!');
 
 session_start();
