@@ -1,3 +1,7 @@
+import { Event } from '/vendor/infrajs/event/Event.js'
+import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
+import { Session } from '/vendor/infrajs/session/Session.js'
+
 window.contacts = {
 	extlayer: {
 		divs: {},
@@ -16,8 +20,6 @@ window.contacts = {
 		let { Popup } = await import('/vendor/infrajs/popup/Popup.js')
 		Popup.open(layer);
 
-		let { Wait } = await import('/vendor/akiyatkin/load/Wait.js')
-		await Wait()
 
 		Event.one('Layer.onshow', function () {
 			Controller.popup_memorize("contacts.show(" + JSON.stringify(data) + ")");

@@ -27,29 +27,7 @@
 	</form>
 	<script async type="module">
 		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
-		import { Controller } from '/vendor/infrajs/controller/src/Controller.js'	
-		import { Layer } from '/vendor/infrajs/controller/src/Layer.js'
-		
-		let div = document.getElementById('{div}')
-		let tag = tag => div.getElementsByTagName(tag)[0]
-		let form = tag('form')
-		let layer = Controller.ids[{id}]
-		
-		let iscontext = () => {
-			let layer = Controller.ids[{id}]
-			if (!layer) return true
-			return layer.counter == {counter}
-		}
-		Layer.hand('submit', async (l) => {
-			if (!iscontext()) return
-			if (l != layer) return
-			let token = await reCAPTCHA.execute('contacts')
-			let inp = document.createElement("input")
-			inp.type = "hidden"
-			inp.name = "g-recaptcha-token"
-			inp.value = token
-			form.appendChild(inp)
-		})
+		reCAPTCHA.init("{div}", {id}, {counter})
 	</script>
 	{config.ans:ans.msg}
 </div>
