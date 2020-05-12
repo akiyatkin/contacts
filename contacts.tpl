@@ -84,18 +84,17 @@
 	</div>
 
 {reCAPTCHA:}
-	<script async type="module">
+	<script type="module">
 		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
 		import { Context } from '/vendor/infrajs/controller/src/Context.js'
 		let context = new Context("{div}")
 		reCAPTCHA.init(context, {id})
 	</script>
 {script:}
-	<script async type="module">
+	<script type="module">
 		import { Submit } from '/vendor/infrajs/layer-onsubmit/Submit.js'
 		import { Context } from '/vendor/infrajs/controller/src/Context.js'
 		import { Autosave } from '/vendor/infrajs/layer-autosave/Autosave.js'
-		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
 
 		let context = new Context("{div}")
 		let tag = tag => context.div.getElementsByTagName(tag)[0]
