@@ -1,6 +1,9 @@
 import { Event } from '/vendor/infrajs/event/Event.js'
 import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
 import { Session } from '/vendor/infrajs/session/Session.js'
+import { DOM } from '/vendor/akiyatkin/load/DOM.js'
+import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+import { Popup } from '/vendor/infrajs/popup/Popup.js'
 
 window.contacts = {
 	extlayer: {
@@ -10,14 +13,12 @@ window.contacts = {
 		config: {}
 	},
 	show: async function (data) {
-		let { CDN } = await import('/vendor/akiyatkin/load/CDN.js')
 		await CDN.load('jquery')
 		var layer = this.popup
 
 		if (!layer.config) layer.config = {};
 		layer.config.data = data;
 
-		let { Popup } = await import('/vendor/infrajs/popup/Popup.js')
 		Popup.open(layer);
 
 
@@ -53,8 +54,8 @@ contacts.layer.external = contacts.extlayer;
 contacts.callback_layer = {
 	"external": "-contacts/callback/layer.json"
 }
-Event.handler('Controller.onshow', async () => {
-	let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
+
+DOM.hand('show', async () => {
 	await CDN.load('jquery');
 	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(function () {
 		var data = $(this).data();
@@ -79,6 +80,7 @@ Event.handler('Controller.onshow', async () => {
 
 	let cls = cls => document.getElementsByClassName(cls)
 	let list = cls('showCallback')
+	
 	for (let i = 0, l = list.length; i < l; i++) {
 		let el = list[i]
 		if (el.showCallback) continue

@@ -27,7 +27,9 @@
 	</form>
 	<script async type="module">
 		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
-		reCAPTCHA.init("{div}", {id}, {counter})
+		import { Context } from '/vendor/infrajs/controller/src/Context.js'
+		let context = new Context("{div}")
+		reCAPTCHA.init(context, {id})
 	</script>
 	{config.ans:ans.msg}
 </div>
