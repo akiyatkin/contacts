@@ -1,9 +1,9 @@
 import { Event } from '/vendor/infrajs/event/Event.js'
-import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
 import { Session } from '/vendor/infrajs/session/Session.js'
 import { DOM } from '/vendor/akiyatkin/load/DOM.js'
 import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 import { Popup } from '/vendor/infrajs/popup/Popup.js'
+import { Layer } from '/vendor/infrajs/controller/src/Layer.js'
 
 window.contacts = {
 	extlayer: {
@@ -23,7 +23,7 @@ window.contacts = {
 
 
 		Event.one('Layer.onshow', function () {
-			Controller.popup_memorize("contacts.show(" + JSON.stringify(data) + ")");
+			Popup.memorize("contacts.show(" + JSON.stringify(data) + ")");
 		}, '', layer);
 
 	},
