@@ -13,7 +13,7 @@ use akiyatkin\recaptcha\reCAPTCHA;
 $conf = Config::get('contacts');
 
 $ans = array();
-
+$ans['popup'] = true;
 if (empty($_POST['name'])) $persona = '';
 else $persona = $_POST['name'];
 
