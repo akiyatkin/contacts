@@ -86,22 +86,23 @@
 {reCAPTCHA:}
 	<script type="module">
 		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
-		import { Context } from '/vendor/infrajs/controller/src/Context.js'
-		let context = new Context("{div}")
-		reCAPTCHA.init(context, {id})
+		let context = div.firstElementChild
+		reCAPTCHA.init(context, 'contacts')
 	</script>
 {script:}
 	<script type="module">
-		import { Submit } from '/vendor/infrajs/layer-onsubmit/Submit.js'
-		import { Context } from '/vendor/infrajs/controller/src/Context.js'
-		import { Autosave } from '/vendor/infrajs/layer-autosave/Autosave.js'
+		import { Form } from '/vendor/akiyatkin/form/Form.js'
+		import { Autosave } from '/vendor/akiyatkin/form/Autosave.js'
+		import { Goal } from '/vendor/akiyatkin/goal/Goal.js'
 
-		let context = new Context("{div}")
-		let tag = tag => context.div.getElementsByTagName(tag)[0]
+		let div = document.getElementById('{div}')
+		let context = div.firstElementChild
+
+		let tag = tag => div.getElementsByTagName(tag)[0]
 		let form = tag('form')
-		Submit.init(form, {id}).then(layer => {
-			let tag = tag => context.div.getElementsByTagName(tag)
-			if (!context.is()) return
+		Submit.init(form, {id}).then( f => {
+			let tag = tag => div.getElementsByTagName(tag)
+			if (!context.parentElement) return
 			let ta = tag('textarea')[0]
 			ta.value = ''
 			ta.dispatchEvent(new window.Event('change'))

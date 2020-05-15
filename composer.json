@@ -2,9 +2,7 @@
 	"name": "infrajs/contacts",
 	"description": "Contact form",
 	"require": {
-		"infrajs/layer-onsubmit":"~1",
-		"infrajs/layer-autosave":"~1",
-		"infrajs/layer-autofocus":"~1",
+		"akiyatkin/form":"~1",
 		"infrajs/popup": "~1",
 		"akiyatkin/goal":"~1",
 		"akiyatkin/boo":"~1",

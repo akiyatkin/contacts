@@ -25,7 +25,7 @@
 			{~conf.contacts.terms?:cont.terms}
 		<button style="margin-bottom:15px" type="submit" class="btn {config.btncls?config.btncls?:btncls} btn-lg">Жду звонка</button>
 	</form>
-	<script async type="module">
+	<script type="module">
 		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
 		import { Context } from '/vendor/infrajs/controller/src/Context.js'
 		import { Submit } from '/vendor/infrajs/layer-onsubmit/Submit.js'
