@@ -27,7 +27,15 @@
 				height:102px;
 			}
 		</style>
-		<form action="/-contacts/cont.php" method="post">
+		<form action="/-contacts/cont.php" 
+			method="post" 
+			data-layerid="{id}"
+			data-autofocus="{autofocus}"
+			data-autosave="{autosavename}" 
+			data-goal="{goal}" 
+			data-global="{global}"
+			data-recaptcha="contacts">
+
 			{:formbody}
 			<div style="margin-bottom:10px">{~conf.recaptcha?:reCAPTCHA}</div>
 			{config.ans:ans.msg}
@@ -84,30 +92,21 @@
 	</div>
 
 {reCAPTCHA:}
-	<script type="module">
-		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
-		let context = div.firstElementChild
-		reCAPTCHA.init(context, 'contacts')
-	</script>
 {script:}
 	<script type="module">
 		import { Form } from '/vendor/akiyatkin/form/Form.js'
-		import { Autosave } from '/vendor/akiyatkin/form/Autosave.js'
-		import { Goal } from '/vendor/akiyatkin/goal/Goal.js'
-
+		
 		let div = document.getElementById('{div}')
-		let context = div.firstElementChild
-
 		let tag = tag => div.getElementsByTagName(tag)[0]
 		let form = tag('form')
-		Submit.init(form, {id}).then( f => {
+
+		Form.on('init', form).then(ans => {
+			if (!ans.result) return
+			if (!form.closest('html')) return
 			let tag = tag => div.getElementsByTagName(tag)
-			if (!context.parentElement) return
 			let ta = tag('textarea')[0]
 			ta.value = ''
 			ta.dispatchEvent(new window.Event('change'))
 		})
-
-		Autosave.init("{autosavename}", "{div}");
 
 	</script>

@@ -26,20 +26,12 @@
 		<button style="margin-bottom:15px" type="submit" class="btn {config.btncls?config.btncls?:btncls} btn-lg">Жду звонка</button>
 	</form>
 	<script type="module">
-		import { reCAPTCHA } from '/vendor/akiyatkin/recaptcha/reCAPTCHA.js'
-		import { Context } from '/vendor/infrajs/controller/src/Context.js'
-		import { Submit } from '/vendor/infrajs/layer-onsubmit/Submit.js'
-		import { Autosave } from '/vendor/infrajs/layer-autosave/Autosave.js'
-
-		let context = new Context("{div}")
-		
-		reCAPTCHA.init(context, {id})
+		import { Form } from '/vendor/akiyatkin/form/Form.js'
 
 		let tag = tag => context.div.getElementsByTagName(tag)[0]
 		let form = tag('form')
-		Submit.init(form, {id})
 
-		Autosave.init("{autosavename}", "{div}");
+		Form.on('init', form)
 
 	</script>
 	{config.ans:ans.msg}

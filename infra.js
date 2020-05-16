@@ -13,7 +13,7 @@ window.contacts = {
 		config: {}
 	},
 	show: async function (data) {
-		await CDN.load('jquery')
+		await CDN.on('load','jquery')
 		var layer = this.popup
 
 		if (!layer.config) layer.config = {};
@@ -56,7 +56,7 @@ contacts.callback_layer = {
 }
 
 DOM.race('load', async () => {
-	await CDN.load('jquery');
+	await CDN.on('load','jquery');
 	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(function () {
 		var data = $(this).data();
 		if ($(this).data('text')) {
