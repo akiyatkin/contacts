@@ -19,7 +19,14 @@
 	{:logo}
 	<h1>Заказать звонок</h1>
 	<p>Оставьте свой номер и мы перезвоним в рабочее время.</p>
-	<form method="post" action="/-contacts/callback/">
+	<form method="post" action="/-contacts/callback/"
+		data-layerid="{id}"
+		data-autofocus="{autofocus}"
+		data-autosave="{autosavename}" 
+		data-goal="{goal}" 
+		data-global="{global}"
+		data-recaptcha="contacts"
+		>
 		<p><input name="phone" type="tel" class="form-control" placeholder="+7 (999) 999 99 99"></p>
 
 			{~conf.contacts.terms?:cont.terms}
@@ -28,7 +35,8 @@
 	<script type="module">
 		import { Form } from '/vendor/akiyatkin/form/Form.js'
 
-		let tag = tag => context.div.getElementsByTagName(tag)[0]
+		let div = document.getElementById('{div}')
+		let tag = tag => div.getElementsByTagName(tag)[0]
 		let form = tag('form')
 
 		Form.on('init', form)
