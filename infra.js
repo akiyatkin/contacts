@@ -1,3 +1,5 @@
+import { } from '/vendor/infrajs/memcode/infra.js'
+
 import { Event } from '/vendor/infrajs/event/Event.js'
 import { Session } from '/vendor/infrajs/session/Session.js'
 import { DOM } from '/vendor/akiyatkin/load/DOM.js'
@@ -55,7 +57,7 @@ contacts.callback_layer = {
 	"external": "-contacts/callback/layer.json"
 }
 
-DOM.race('load', async () => {
+DOM.done('load', async () => {
 	await CDN.on('load','jquery');
 	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(function () {
 		var data = $(this).data();
