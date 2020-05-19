@@ -58,7 +58,7 @@ contacts.callback_layer = {
 	"external": "-contacts/callback/layer.json"
 }
 
-DOM.done('load', async () => {
+DOM.done('load', async href => {
 	await CDN.on('load','jquery');
 	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(function () {
 		var data = $(this).data();

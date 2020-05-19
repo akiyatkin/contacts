@@ -19,7 +19,7 @@
 	{:logo}
 	<h1>Заказать звонок</h1>
 	<p>Оставьте свой номер и мы перезвоним в рабочее время.</p>
-	<form method="post" action="/-contacts/callback/"
+	<form class="form" method="post" action="/-contacts/callback/"
 		data-layerid="{id}"
 		data-autofocus="{autofocus}"
 		data-autosave="{autosavename}" 
