@@ -97,13 +97,14 @@
 		import { Form } from '/vendor/akiyatkin/form/Form.js'
 		
 		let div = document.getElementById('{div}')
-		let tag = tag => div.getElementsByTagName(tag)[0]
-		let form = tag('form')
+		let tag = tag => div.getElementsByTagName(tag)
+		let form = tag('form')[0]
 
-		Form.on('init', form).then(ans => {
+		Form.fire('init', form)
+
+		Form.wait('submit', form).then(async (ans) => {
 			if (!ans.result) return
-			if (!form.closest('html')) return
-			let tag = tag => div.getElementsByTagName(tag)
+			let tag = tag => form.getElementsByTagName(tag)
 			let ta = tag('textarea')[0]
 			ta.value = ''
 			ta.dispatchEvent(new window.Event('change'))
