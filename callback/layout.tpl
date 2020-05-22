@@ -25,7 +25,7 @@
 		data-autosave="{autosavename}" 
 		data-goal="{goal}" 
 		data-global="{global}"
-		data-recaptcha="contacts"
+		data-recaptcha="callback"
 		>
 		<p><input name="phone" type="tel" class="form-control" placeholder="+7 (999) 999 99 99"></p>
 
