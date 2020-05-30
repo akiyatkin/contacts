@@ -2,7 +2,6 @@ import { } from '/vendor/infrajs/memcode/infra.js'
 import { } from '/vendor/akiyatkin/form/infra.js'
 
 import { Event } from '/vendor/infrajs/event/Event.js'
-import { Session } from '/vendor/infrajs/session/Session.js'
 import { DOM } from '/vendor/akiyatkin/load/DOM.js'
 import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 import { Popup } from '/vendor/infrajs/popup/Popup.js'
@@ -60,7 +59,8 @@ contacts.callback_layer = {
 
 DOM.done('load', async href => {
 	await CDN.on('load','jquery');
-	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(function () {
+	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(async function () {
+		let Session = (await import('/vendor/infrajs/session/Session.js')).Session
 		var data = $(this).data();
 		if ($(this).data('text')) {
 			if (!Session.get('user.text')) {
