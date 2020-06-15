@@ -5,7 +5,6 @@ import { Event } from '/vendor/infrajs/event/Event.js'
 import { DOM } from '/vendor/akiyatkin/load/DOM.js'
 import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 import { Popup } from '/vendor/infrajs/popup/Popup.js'
-import { Layer } from '/vendor/infrajs/controller/src/Layer.js'
 
 window.contacts = {
 	extlayer: {
