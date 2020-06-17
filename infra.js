@@ -1,96 +1,48 @@
-import { } from '/vendor/infrajs/memcode/infra.js'
+
 import { } from '/vendor/akiyatkin/form/infra.js'
-
-import { Event } from '/vendor/infrajs/event/Event.js'
 import { DOM } from '/vendor/akiyatkin/load/DOM.js'
-import { CDN } from '/vendor/akiyatkin/load/CDN.js'
-import { Popup } from '/vendor/infrajs/popup/Popup.js'
+import { Contacts } from '/vendor/infrajs/contacts/Contacts.js'
 
-window.contacts = {
-	extlayer: {
-		divs: {},
-		tplroot: "start",
-		external: '-contacts/contacts.layer.json',
-		config: {}
-	},
-	show: async function (data) {
-		await CDN.on('load','jquery')
-		var layer = this.popup
+let cls = cls => document.getElementsByClassName(cls)
+let ws = new WeakSet() 
+DOM.done('load', () => {
 
-		if (!layer.config) layer.config = {};
-		layer.config.data = data;
-
-		Popup.open(layer);
-
-
-		Event.one('Layer.onshow', function () {
-			Popup.memorize("contacts.show(" + JSON.stringify(data) + ")");
-		}, '', layer);
-
-	},
-	popup: {},
-	layer: {
-		onlyclient: true,
-		autofocus: true,
-		div: "showContacts",
-		divcheck: true
-	}
-}
-contacts.extlayer.onsubmit = function (layer) {
-	var config = layer.config;
-	var div = $('#' + layer.div);
-	if (!config.ans) {
-		config.ans = {
-			"result": 0,
-			"msg": "Произошла ошибка.<br>Cообщение не отправлено..."
-		}
-	}
-	if (config.ans.result) {
-		div.find('textarea').val('').change();
-	}
-}
-contacts.popup.external = contacts.extlayer;
-contacts.layer.external = contacts.extlayer;
-
-contacts.callback_layer = {
-	"external": "-contacts/callback/layer.json"
-}
-
-DOM.done('load', async href => {
-	await CDN.on('load','jquery');
-	$('.showContacts[showContacts!=true]').attr('infra', 'false').attr('showContacts', 'true').click(async function () {
-		let Session = (await import('/vendor/infrajs/session/Session.js')).Session
-		var data = $(this).data();
-		if ($(this).data('text')) {
-			if (!Session.get('user.text')) {
-				Session.set('user.text', $(this).data('text'), false, function () {
-					contacts.show(data);
-				});
+	for (let el of cls('showContacts')) {
+		if (ws.has(el)) continue
+		ws.add(el)
+		if (el.tagName == 'A') el.dataset.crumb = 'false'
+		el.addEventListener('click', async event => {
+			event.preventDefault();
+			let Session = (await import('/vendor/infrajs/session/Session.js')).Session
+			if (el.dataset.text) {
+				if (!Session.get('user.text')) {
+					Session.set('user.text', el.dataset.text, false, function () {
+						Contacts.show(el.dataset);
+					});
+				}
+			} else if (el.dataset.replace) {
+				Session.set('user.text', el.dataset.replace, false, function () {
+					Contacts.show(el.dataset)
+				})
+			} else {
+				Contacts.show(el.dataset)
 			}
-		}
-		if ($(this).data('replace')) {
-			Session.set('user.text', $(this).data('replace'), false, function () {
-				contacts.show(data);
-			});
-		} else {
-			contacts.show(data);
-		}
-		return false;
-	});
-
-
-
-	let cls = cls => document.getElementsByClassName(cls)
-	let list = cls('showCallback')
-	
-	for (let i = 0, l = list.length; i < l; i++) {
-		let el = list[i]
-		if (el.showCallback) continue
-		el.showCallback = true
-		el.addEventListener('click', async () => {
-			let { Popup } = await import('/vendor/infrajs/popup/Popup.js')
-			Popup.show(contacts.callback_layer)
 		})
 	}
 
-});
+	
+	for (let el of cls('showCallback')) {
+		if (ws.has(el)) continue
+		ws.add(el)
+		if (el.tagName == 'A') el.dataset.crumb = 'false'
+		el.addEventListener('click', async event => {
+			event.preventDefault();
+			let { Popup } = await import('/vendor/infrajs/popup/Popup.js')
+			Popup.show(Contacts.callback_layer)
+		})
+	}
+
+
+
+
+})
