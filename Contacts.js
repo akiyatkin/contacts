@@ -17,7 +17,7 @@ let Contacts = {
 
 		await Popup.open(layer);
 		
-		Popup.memorize("Contacts.show(" + JSON.stringify(data) + ")");
+		Popup.memorize("import('/vendor/infrajs/contacts/Contacts.js').then(obj => obj.Contacts.show(" + JSON.stringify(data) + "))");
 
 	},
 	popup: {},
