@@ -102,11 +102,11 @@ if (trim(mb_strtolower($data['name'])) == 'itlife') {
 	$mdata['testmail'] = true;
 } else {
 	$mdata['testmail'] = false;
-	session_start();
-	if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
-	if (time() - $_SESSION['submit_time'] < 60) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
-	$_SESSION['submit_time'] = time();
 }
+session_start();
+if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
+if (time() - $_SESSION['submit_time'] < 60) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
+
 $ans['testmail'] = $mdata['testmail'];
 
 
@@ -137,6 +137,8 @@ if (!isset($mdata['email_from'])) return Ans::err($ans, 'Ошибка с адр�
 
 //$r = Mail::toAdmin($mdata['subject'], $mdata['email_from'], $body, $mdata['testmail']);
 $r = Mail::html($mdata['subject'], '<pre>'.$body.'</pre>', $mdata['email_from'], true);//from to
+
+if ($r) $_SESSION['submit_time'] = time();
 
 if (!$r) return Ans::err($ans,"Не удалось отправить письмо из-за ошибки на сервере!");
 
