@@ -6,7 +6,8 @@ import { Contacts } from '/vendor/infrajs/contacts/Contacts.js'
 let cls = cls => document.getElementsByClassName(cls)
 let ws = new WeakSet() 
 DOM.done('load', () => {
-
+	
+	let list = cls('showContacts')
 	for (let el of cls('showContacts')) {
 		if (ws.has(el)) continue
 		ws.add(el)
@@ -30,8 +31,8 @@ DOM.done('load', () => {
 		})
 	}
 
-	
-	for (let el of cls('showCallback')) {
+	list = cls('showCallback')
+	for (let el of list) {
 		if (ws.has(el)) continue
 		ws.add(el)
 		if (el.tagName == 'A') el.dataset.crumb = 'false'
