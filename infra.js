@@ -20,6 +20,8 @@ DOM.done('load', () => {
 					Session.set('user.text', el.dataset.text, false, function () {
 						Contacts.show(el.dataset);
 					});
+				} else {
+					Contacts.show(el.dataset);
 				}
 			} else if (el.dataset.replace) {
 				Session.set('user.text', el.dataset.replace, false, function () {
