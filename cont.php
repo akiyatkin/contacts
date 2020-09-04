@@ -12,6 +12,8 @@ use akiyatkin\recaptcha\reCAPTCHA;
 
 $conf = Config::get('contacts');
 
+
+
 $ans = array();
 $ans['popup'] = true;
 if (empty($_POST['name'])) $persona = '';
@@ -34,7 +36,8 @@ if ($conf['terms']) {
 $r = reCAPTCHA::check();
 if (!$r) return Ans::err($ans,'Ошибка, не пройдена проверка антибот.');
 
-
+$key = Ans::GET('key');
+if ($key != $conf['key']) return Ans::err($ans,'Ошибка, не пройдена защита от спама.');
 
 if (in_array('name', $conf['required'])) {
 	if (strlen($persona) < 2) return Ans::err($ans, 'Уточните, пожалуйста, ваше имя!');

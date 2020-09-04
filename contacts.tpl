@@ -27,7 +27,7 @@
 				height:102px;
 			}
 		</style>
-		<form class="form" action="/-contacts/cont.php" 
+		<form class="form" action="/-contacts/cont.php?key={Config.get().contacts.key}" 
 			method="post" 
 			data-layerid="{id}"
 			data-autofocus="{autofocus}"
