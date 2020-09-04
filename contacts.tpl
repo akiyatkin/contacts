@@ -27,7 +27,11 @@
 				height:102px;
 			}
 		</style>
+<<<<<<< HEAD
 		<form class="form" action="/-contacts/cont.php?key={Config.get().contacts.key}" 
+=======
+		<form class="form" action="/-contacts/cont.php?key={Config.get().key}" 
+>>>>>>> 14180c30be15a990733a73e4df955e6c05d47d1b
 			method="post" 
 			data-layerid="{id}"
 			data-autofocus="{autofocus}"

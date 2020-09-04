@@ -1,6 +1,6 @@
 {
 	"pub":["yaCounter","yaGoal","filesize","terms","key"],
-	"key":"123",
+	"key":2,
 	"dependencies":"event",
 	"js":["infra.js"],
 	"css":["contacts.css"],
