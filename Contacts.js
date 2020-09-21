@@ -1,3 +1,5 @@
+import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+import { Popup } from '/vendor/infrajs/popup/Popup.js'
 
 let Contacts = {
 	extlayer: {
@@ -7,7 +9,7 @@ let Contacts = {
 		config: {}
 	},
 	show: async function (data) {
-		await CDN.on('load','jquery')
+		await CDN.fire('load','jquery')
 		let Layer = (await import('/vendor/infrajs/controller/src/Layer.js')).Layer
 		let Popup = (await import('/vendor/infrajs/popup/Popup.js')).Popup 
 		var layer = this.popup
