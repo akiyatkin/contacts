@@ -26,6 +26,9 @@
 			.plugin_contacts textarea {
 				height:102px;
 			}
+			.plugin_contacts .form {
+				padding-bottom:10px;
+			}
 		</style>
 		<form class="form" action="/-contacts/cont.php?key={Config.get().contacts.key}" 
 			method="post" 
