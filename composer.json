@@ -7,6 +7,7 @@
 		"akiyatkin/goal":"~1",
 		"infrajs/view": "~1",
 		"infrajs/mail": "~1",
+		"infrajs/session": "~1",
 		"akiyatkin/recaptcha":"~1",
 		"infrajs/controller": "~1"
 	}
