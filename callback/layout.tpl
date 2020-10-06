@@ -14,6 +14,7 @@
 		}
 		.popupblock .form-control {
 			width: 50%;
+			min-width:250px;
 		}
 	</style>
 	{:logo}
