@@ -7,6 +7,7 @@ use infrajs\load\Load;
 use infrajs\mail\Mail;
 use infrajs\template\Template;
 use infrajs\router\Router;
+use infrajs\access\Access;
 use infrajs\config\Config;
 use akiyatkin\recaptcha\reCAPTCHA;
 
@@ -43,9 +44,10 @@ if (in_array('name', $conf['required'])) {
 	if (strlen($persona) < 2) return Ans::err($ans, 'Уточните, пожалуйста, ваше имя!');
 }
 
-
-$is_email = Mail::check($email);
-if ($is_email != true) return Ans::err($ans, 'Уточните, пожалуйста, адрес электронной почты!');
+if (in_array('email', $conf['required'])) {
+	$is_email = Mail::check($email);
+	if ($is_email != true) return Ans::err($ans, 'Уточните, пожалуйста, адрес электронной почты!');
+}
 
 if (in_array('text', $conf['required'])) {
 	if (strlen($text) < 5) return Ans::err($ans, 'Уточните, пожалуйста, текст письма!');
@@ -96,8 +98,12 @@ $maildir = Path::resolve('~auto/.contacts/');
 if (!is_dir($maildir)) mkdir($maildir);
 
 $mdata = array();
-$p = explode(',', $data['email']);
-$mdata['email_from'] = $p[0];
+if (in_array('email', $conf['required'])) {
+	$p = explode(',', $data['email']);
+	$mdata['email_from'] = $p[0];
+} else {
+	$mdata['email_from'] = 'noreplay@'.$_SERVER['HTTP_HOST'];
+}
 $mdata['subject'] = 'Сообщение через форму контактов '.$_SERVER['HTTP_HOST'];
 if (trim(mb_strtolower($data['name'])) == 'itlife') {
 	$data['text'] = print_r($mdata,true)."\n\n".$data['text'];

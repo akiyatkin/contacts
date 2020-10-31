@@ -6,7 +6,7 @@
 	"css":["contacts.css"],
 	"tester":"tester.php",
 	"terms":false,
-	"required":["name","text","phone"],
+	"required":["email", "name","text","phone"],
 	"file":false,
 	"filesize":5
 }
