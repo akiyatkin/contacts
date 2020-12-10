@@ -98,7 +98,8 @@
 {script:}
 	<script type="module">
 		import { Form } from '/vendor/akiyatkin/form/Form.js'
-		
+		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+		CDN.fire('load','bootstrap')
 		let div = document.getElementById('{div}')
 		let tag = tag => div.getElementsByTagName(tag)
 		let form = tag('form')[0]
