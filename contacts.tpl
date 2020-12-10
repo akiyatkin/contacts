@@ -30,7 +30,7 @@
 				padding-bottom:10px;
 			}
 		</style>
-		<form class="form" action="/-contacts/cont.php?key={Config.get().contacts.key}" 
+		<form style="opacity: 0; transition: opacity 1s " class="form" action="/-contacts/cont.php?key={Config.get().contacts.key}" 
 			method="post" 
 			data-layerid="{id}"
 			data-autofocus="{autofocus}"
@@ -99,11 +99,13 @@
 	<script type="module">
 		import { Form } from '/vendor/akiyatkin/form/Form.js'
 		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
-		CDN.fire('load','bootstrap')
+
 		let div = document.getElementById('{div}')
 		let tag = tag => div.getElementsByTagName(tag)
 		let form = tag('form')[0]
-
+		CDN.fire('load','bootstrap').then(() => {
+			form.style.opacity = 1
+		})
 		Form.fire('init', form)
 
 		Form.wait('submit', form).then(async (ans) => {
