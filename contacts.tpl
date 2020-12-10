@@ -38,7 +38,6 @@
 			data-goal="{goal}" 
 			data-global="{global}"
 			data-recaptcha="contacts">
-
 			{:formbody}
 			<div style="margin-bottom:10px">{~conf.recaptcha?:reCAPTCHA}</div>
 			{config.ans:ans.msg}
