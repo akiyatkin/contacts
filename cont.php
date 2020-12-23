@@ -61,16 +61,21 @@ if (in_array('phone', $conf['required'])) {
 
 if ($conf['file']) {
 	$file = $_FILES['file'];
-	if ($file['error']) {
-		if ($file['error'] == 1 || $file['error'] == 1 ) return Ans::err($ans, 'Приложен слишком большой файл.');
-		return Ans::log($ans, 'Ошибка '.$file['error'].'. Извините за неудобства, воспользуйтесь почтовым адресом.');
-	}
+	$isfile = $file && $file['error'] != 4;
+
 	if (in_array('file', $conf['required'])) {
-		if (!$file) return Ans::err($ans, 'Приложите файл!');
+		if (!$isfile) return Ans::err($ans, 'Приложите файл!');
 	}
-	if ($conf['filesize']) {
-		$size = $file['size']/(1000*1000);
-		if ($size>$conf['filesize']) return Ans::err($ans, 'Приложен слишком большой файл. Ограничение '.$conf['filesize'].' Mb');
+	if ($isfile) {
+		if ($file['error']) {
+			if ($file['error'] == 1 || $file['error'] == 1) return Ans::err($ans, 'Приложен слишком большой файл.');
+			return Ans::log($ans, 'Ошибка '.$file['error'].'. Извините за неудобства, воспользуйтесь почтовым адресом.');
+		}
+		
+		if ($conf['filesize']) {
+			$size = $file['size'] / (1024*1024);
+			if ($size>$conf['filesize']) return Ans::err($ans, 'Приложен слишком большой файл. Ограничение '.$conf['filesize'].' Mb');
+		}
 	}
 }
 	
@@ -94,7 +99,7 @@ $data['browser'] = $_SERVER['HTTP_USER_AGENT'];
 $data['time'] 	= date("F j, Y, g:i a");
 
 
-$maildir = Path::resolve('~auto/.contacts/');	
+$maildir = Path::resolve($conf['dir']);//'~auto/.contacts/'
 if (!is_dir($maildir)) mkdir($maildir);
 
 $mdata = array();
@@ -124,7 +129,7 @@ if ($maildir) {
 	$folder = Path::theme($maildir);
 	$name = Path::tofs(Path::encode($data['name']));
 	$fname = date('Y F j H-i').' '.$name.' '.time();
-	if ($conf['file'] && $file) {
+	if ($conf['file'] && $isfile) {
 		$src = $folder.$fname.'.'.Path::tofs($file['name']);
 		$r = move_uploaded_file($file['tmp_name'], $src);
 		if (!$r) return Ans::err($ans, 'Не удалось загрузить файл');
