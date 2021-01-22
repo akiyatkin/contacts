@@ -43,6 +43,16 @@
 			{config.ans:ans.msg}
 			{:submit}
 		</form>
+		<script type="module">
+			import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+
+			let div = document.getElementById('{div}')
+			let tag = tag => div.getElementsByTagName(tag)
+			let form = tag('form')[0]
+			CDN.fire('load','bootstrap').then(() => {
+				form.style.opacity = 1
+			})
+		</script>
 	</div>
 {submit:}<button type="submit" class="btn btn-success">Отправить</button>
 {formbody:}
@@ -102,9 +112,7 @@
 		let div = document.getElementById('{div}')
 		let tag = tag => div.getElementsByTagName(tag)
 		let form = tag('form')[0]
-		CDN.fire('load','bootstrap').then(() => {
-			form.style.opacity = 1
-		})
+		
 		Form.fire('init', form)
 
 		Form.wait('submit', form).then(async (ans) => {
