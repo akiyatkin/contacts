@@ -1,4 +1,3 @@
-import { } from '/vendor/infrajs/memcode/infra.js'
 import { } from '/vendor/akiyatkin/form/infra.js'
 import { DOM } from '/vendor/akiyatkin/load/DOM.js'
 import { Contacts } from '/vendor/infrajs/contacts/Contacts.js'
