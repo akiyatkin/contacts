@@ -3,7 +3,6 @@
 	"key":2,
 	"dependencies":"event",
 	"js":["infra.js"],
-	"css":["contacts.css"],
 	"dir":"~auto/.contacts/",
 	"tester":"tester.php",
 	"terms":false,
