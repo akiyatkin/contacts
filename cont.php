@@ -10,6 +10,7 @@ use infrajs\router\Router;
 use infrajs\access\Access;
 use infrajs\config\Config;
 use akiyatkin\recaptcha\reCAPTCHA;
+use akiyatkin\utm\UTM;
 
 $conf = Config::get('contacts');
 
@@ -99,9 +100,6 @@ $data['browser'] = $_SERVER['HTTP_USER_AGENT'];
 $data['time'] 	= date("F j, Y, g:i a");
 
 
-$maildir = Path::resolve($conf['dir']);//'~auto/.contacts/'
-if (!is_dir($maildir)) mkdir($maildir);
-
 $mdata = array();
 if (in_array('email', $conf['required'])) {
 	$p = explode(',', $data['email']);
@@ -110,51 +108,21 @@ if (in_array('email', $conf['required'])) {
 	$mdata['email_from'] = 'noreplay@'.$_SERVER['HTTP_HOST'];
 }
 $mdata['subject'] = 'Сообщение через форму контактов '.$_SERVER['HTTP_HOST'];
-if (trim(mb_strtolower($data['name'])) == 'itlife') {
-	$data['text'] = print_r($mdata,true)."\n\n".$data['text'];
-	$mdata['subject'] = 'ПРОВЕРОЧНОЕ '.$mdata['subject'];
-	$mdata['testmail'] = true;
-} else {
-	$mdata['testmail'] = false;
-}
+
 session_start();
 if (empty($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;			
 if (time() - $_SESSION['submit_time'] < 30) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
 
-$ans['testmail'] = $mdata['testmail'];
-
-
-
-if ($maildir) {
-	$folder = Path::theme($maildir);
-	$name = Path::tofs(Path::encode($data['name']));
-	$fname = date('Y F j H-i').' '.$name.' '.time();
-	if ($conf['file'] && $isfile) {
-		$src = $folder.$fname.'.'.Path::tofs($file['name']);
-		$r = move_uploaded_file($file['tmp_name'], $src);
-		if (!$r) return Ans::err($ans, 'Не удалось загрузить файл');
-		$data['file'] = Path::toutf(Path::pretty($src));
-	}
-}
-
 $utms = Ans::REQ('utms');
-$utms = json_decode($utms, true);
-if (!is_array($utms)) $utms = [];
-$data['utms'] = $utms;
+$data['utms'] = UTM::parse($utms);
+
 
 $body = Template::parse('-contacts/mail.tpl', $data);
 if (!$body) $body = 'Ошибка. Не найден шаблон письма!';
 
-if ($maildir) {
-	@file_put_contents($folder.$fname.'.txt', print_r($body, true)."\n\n\n\n\n".print_r($mdata, true));
-}
-
-
-
 
 if (!isset($mdata['email_from'])) return Ans::err($ans, 'Ошибка с адресом получателя!');
 
-//$r = Mail::toAdmin($mdata['subject'], $mdata['email_from'], $body, $mdata['testmail']);
 $r = Mail::html($mdata['subject'], $body, $mdata['email_from'], true);//from to
 
 if ($r) $_SESSION['submit_time'] = time();

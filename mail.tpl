@@ -8,13 +8,33 @@
 	-------------------<br>
 	<pre>{text}</pre>
 	-------------------<br>
-	Страница: <a href="{ref}">{ref}</a><br>
-	IP: {ip}<br>
-	Браузер: {browser}<br>
-	<table>{utms::utm}</table>
+	{:ps}
+{PHONE:}
+	Перезвоните по телефону<br>
+	-------------------<br>
+	<pre>{phone}</pre>
+	-------------------<br>
+	{:ps}
+{ps:}
+	<p></p>
+	<hr>
+	<p></p>
+	<div style="font-size: 80%;">
+		<table style="text-align:left">
+			<tr><th>Дата</th><th>Запрос</th><th>Откуда</th><th>Куда</th>
+			{utms::utm}
+		</table>
+		<p>
+			Страница: <a href="{ref}">{ref}</a><br>
+			IP: {ip}<br>
+			Браузер: {browser}
+		</p>
+	</tr>
 {utm:}
 	<tr>
-		<td>{~date(:j F Y H:i,time)}</td>
-		<td><a href="{referrer}">{referrer}</a></td>
-		<td><a href="{href}">{href}</a></td>
+		<td style="vertical-align: top"><nobr>{~date(:d.m.Y H:i,time)}</nobr></td>
+		<td style="vertical-align: top"><i>{q}</i></td>
+		<td style="vertical-align: top"><nobr>{referrerhost}</nobr></td>
+		<td style="vertical-align: top">{hrefpath}{hrefquery?:quest}{hrefquery}</td>
 	</tr>
+	{quest:}?

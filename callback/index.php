@@ -3,6 +3,8 @@ use infrajs\ans\Ans;
 use infrajs\mail\Mail;
 use infrajs\config\Config;
 use akiyatkin\recaptcha\reCAPTCHA;
+use infrajs\view\View;
+use akiyatkin\utm\UTM;
 
 if (isset($_POST["phone"])) {
 	$phone = $_POST["phone"];
@@ -25,35 +27,26 @@ if (!$r) return Ans::err($ans,'Ошибка, не пройдена защита 
 session_start();
 if (!isset($_SESSION['submit_time'])) $_SESSION['submit_time'] = 0;
  
-if (time() - $_SESSION['submit_time'] < 30) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
+if (time() - $_SESSION['submit_time'] < 15) return Ans::err($ans, 'Письмо уже отправлено! Новое сообщение можно будет отправить через 1 минуту!');
 $_SESSION['submit_time'] = time();
 
 $subject = 'Заказ обратного звонка';
-$body = "Перезвоните по телефону<br>".$phone;
 
-
+$data = $_POST;
+$data['post'] 	= $_POST;
+$data['schema'] = View::getSchema();
+$data['host']  	= View::getHost();
+$data['phone']	= $phone;
+$data['ip'] 	= $_SERVER['REMOTE_ADDR'];
+$data['ref'] 	= $_SERVER['HTTP_REFERER'];
+$data['browser'] = $_SERVER['HTTP_USER_AGENT'];
+$data['time'] 	= date("F j, Y, g:i a");
 $utms = ANS::REQ('utms');
-$utms = json_decode($utms, true);
-if (!is_array($utms)) $utms = [];
-$body.="<table>";
-foreach ($utms as $utm) {
-	$body.= "<tr>";
-	$body.= "<td>";
-	$body.= date('Y.m.d H:i', $utm['time']);
-	$body.= "</td>";
-	$body.= "<td>";
-	$body.= $utm['referrer'];
-	$body.= "</td>";
-	$body.= "<td>";
-	$body.= $utm['href'];
-	$body.= "</td>";
-	$body.= "</tr>";
-}	
-$body.='</table>';
+$data['utms'] = UTM::parse($utms);
 
+$body = Template::parse('-contacts/mail.tpl', $data, 'PHONE');
+if (!$body) $body = 'Ошибка. Не найден шаблон письма!';
 
-$from = "noreplay@".$_SERVER["HTTP_HOST"];
-			//($subject, $body, $replay_to, $email_to, $debug = false) { //from to
 $r = Mail::html($subject, $body);
 if (!$r) return Ans::err($ans,'Ошибка, письмо менеджеру не отправлено!');
 
