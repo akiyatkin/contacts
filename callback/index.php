@@ -5,6 +5,7 @@ use infrajs\config\Config;
 use akiyatkin\recaptcha\reCAPTCHA;
 use infrajs\view\View;
 use akiyatkin\utm\UTM;
+use infrajs\template\Template;
 
 if (isset($_POST["phone"])) {
 	$phone = $_POST["phone"];

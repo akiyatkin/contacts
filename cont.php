@@ -14,8 +14,6 @@ use akiyatkin\utm\UTM;
 
 $conf = Config::get('contacts');
 
-
-
 $ans = array();
 $ans['popup'] = true;
 if (empty($_POST['name'])) $persona = '';
