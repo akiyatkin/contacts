@@ -12,7 +12,7 @@
 {form:}
 	{:body}
 	{:script}
-{ans::}-ans/ans.tpl
+{ans::}-ans/ans.tpl?v={~conf.index.v}
 {start:}
 	{:title}
 	{:body}

@@ -1,4 +1,4 @@
-{cont::}-contacts/contacts.tpl
+{cont::}-contacts/contacts.tpl?v={~conf.index.v}
 {root:}
 <div class="popupblock">
 	<style scoped>
